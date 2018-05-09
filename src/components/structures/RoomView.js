@@ -53,6 +53,7 @@ import WidgetEchoStore from '../../stores/WidgetEchoStore';
 import SettingsStore, {SettingLevel} from "../../settings/SettingsStore";
 import WidgetUtils from '../../utils/WidgetUtils';
 import AccessibleButton from "../views/elements/AccessibleButton";
+import SdkConfig from "../../SdkConfig";
 
 const DEBUG = false;
 let debuglog = function() {};
@@ -1078,6 +1079,7 @@ module.exports = React.createClass({
         debuglog("sending search request");
 
         const searchPromise = MatrixClientPeg.get().searchRoomEvents({
+            custom_search_url: SdkConfig.get()['custom_search_url'],
             filter: filter,
             term: term,
         });
