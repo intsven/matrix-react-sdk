@@ -947,5 +947,14 @@
     "Failed to start chat": "Failed to start chat",
     "Messages": "Messages",
     "Actions": "Actions",
-    "Other": "Other"
+    "Other": "Other",
+    "Your Riot is misconfigured": "Your Riot is misconfigured",
+    "Unrecognised address": "Unrecognized address",
+
+    "Cases": "Cases",
+    "New case": "New case",
+    "Create Case": "Create Case",
+    "Vital data": "Vital data",
+    "Anamnesis": "Anamnesis",
+    "Media": "Media"
 }
