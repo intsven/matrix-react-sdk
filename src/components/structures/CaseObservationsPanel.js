@@ -202,7 +202,19 @@ module.exports = React.createClass({
           if(mxEv._clearEvent.type === "care.amp.observation"){
             return true;
           }
+          if(mxEv._clearEvent.type === "care.amp.done"){
+            return true;
+          }
         }
+
+        // unencrypted events
+        if(mxEv.event.type === "care.amp.observation"){
+          return true;
+        }
+        if(mxEv.event.type === "care.amp.done"){
+          return true;
+        }
+
         if( mxEv.event.state_key === "care.amp.case" || mxEv.event.state_key === "care.amp.patient"){
           return true;
         }
