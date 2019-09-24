@@ -1862,5 +1862,10 @@
     "Case title": "Case title",
     "Case note": "Case note",
     "Close case": "Close case",
+    "Archive case": "Archive case",
+    "Close case?": "Close case?",
+    "Closing the case is permanent. After closing the case will not be editable anymore.": "Closing the case is permanent. After closing the case will not be editable anymore.",
+    "Archive case?": "Archive case?",
+    "After archiving the case all the included data will not be accesible anymore.": "After archiving the case all the included data will not be accesible anymore."
 
 }
