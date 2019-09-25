@@ -22,6 +22,7 @@ import sdk from "../../../index";
 export default class ConfirmArchiveCaseDialog extends React.Component {
     static propTypes = {
         onFinished: PropTypes.func.isRequired,
+        room: PropTypes.object.isRequired,
     };
 
     _onConfirm = () => {
@@ -54,6 +55,7 @@ export default class ConfirmArchiveCaseDialog extends React.Component {
                     cancelButton={_t("Cancel")}
                     onCancel={this._onDecline}
                 />
+
             </BaseDialog>
         );
     }

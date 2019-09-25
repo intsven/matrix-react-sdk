@@ -149,6 +149,7 @@ module.exports = createReactClass({
               // forget room
 
           },
+          room: this.props.room,
         });
     },
 
@@ -330,19 +331,8 @@ module.exports = createReactClass({
 
         let archiveCaseButton;
             let caseIsClosed = false;
-            /*
-            const timeline_events = this.props.room.timeline.slice();
-            for (const ev of timeline_events) {
-              if(ev.event.type === 'care.amp.done') {
-                  caseIsClosed = event.content.done;
-              }
-              else if (ev.event.type === 'm.room.encrypted') {
-                if (ev._clearEvent.type === 'care.amp.done'){
-                  caseIsClosed = _clearEvent.content.done;
-              }
-            }
-            */
-            debugger;
+
+            // check if room is closed
             for (let i=0; i <= this.props.room.timeline.length-1; i++) {
               if(this.props.room.timeline[i].event.type === 'care.amp.done') {
                   caseIsClosed = this.props.room.timeline[i].event.content.done;
@@ -357,11 +347,12 @@ module.exports = createReactClass({
             }
 
             archiveCaseButton =
-                <AccessibleButton className="mx_RoomHeader_button amp_RoomHeader_archiveButton"
+                <AccessibleButton className={caseIsClosed ? "amp_RoomHeader_archive_button_active" : "amp_RoomHeader_archive_button_inactive"}
                     onClick={this.onArchiveCaseClick}
                     title={_t('Archive case')}
                     disabled={!caseIsClosed}
                 >
+                  <span>{ _t('Archive case') }</span>
                 </AccessibleButton>;
 
         const rightRow =
