@@ -223,6 +223,20 @@ limitations under the License.
     mask-image: url('$(res)/img/feather-customised/grid.svg');
 }
 
+.amp_RoomHeader_close_button {
+    cursor: pointer;
+    background-color: $amp-roomheader-close-button-color;
+
+    flex: 0 0 auto;
+    position: relative;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 4px;
+    display: flex;
+    justify-content: center;
+    color: $button-fg-color;
+    font-weight: 600;
+}
 
 .amp_RoomHeader_archive_button_active {
     flex: 0 0 auto;

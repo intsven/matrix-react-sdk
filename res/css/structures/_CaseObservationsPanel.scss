@@ -93,3 +93,11 @@ limitations under the License.
   border: 2px solid $amp_case_severity_info_color;
   border-radius: 20px;
 }
+
+.amp_CaseObservationsPanel_isClosedWarning {
+  text-align: center;
+  text-decoration: none;
+  font-family: Arial;
+  font-size: 17px;
+  color: $amp_case_closed_warning_color;
+}
