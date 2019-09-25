@@ -127,7 +127,7 @@ module.exports = createReactClass({
 
                 // send case closed event
                 const client = MatrixClientPeg.get();
-                client.sendEvent(this.props.room.roomId, 'care.amp.done', '{"done": true}').done(() => {
+                client.sendEvent(this.props.room.roomId, 'care.amp.done', {done: true}).done(() => {
                     dis.dispatch({action: 'message_sent'});
                 }, (err) => {
                     dis.dispatch({action: 'message_send_failed'});
@@ -321,10 +321,11 @@ module.exports = createReactClass({
 
         let closeCaseButton;
             closeCaseButton =
-                <AccessibleButton className="mx_RoomHeader_button amp_RoomHeader_closeButton"
+                <AccessibleButton className="amp_RoomHeader_close_button"
                     onClick={this.onCloseCaseClick}
                     title={_t('Close case')}
                 >
+                  <span>{ _t('Close case') }</span>
                 </AccessibleButton>;
 
         let archiveCaseButton;

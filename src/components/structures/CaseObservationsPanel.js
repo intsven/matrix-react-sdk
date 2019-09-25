@@ -124,6 +124,7 @@ module.exports = React.createClass({
         this._isMounted = true;
 
         this.state = {
+            isClosed: false,
             caseTitle: '-',
             caseNote: '-',
             caseSeverity: '-',
@@ -486,10 +487,15 @@ module.exports = React.createClass({
             break;
         }
       }
+
+      if( local_event.type === "care.amp.done" ){
+        this.state.isClosed = local_event.content.done;
+      }
     },
 
     render: function() {
 
+        const isClosedWarningStyle = this.state.isClosed ? {} : { display: 'none' };
         const caseDetailsStyle = this.state.hasCaseData ? {} : { display: 'none' };
         const patientStyle = this.state.hasPatientData ? {} : { display: 'none' };
         const vitalDataStyle = this.state.hasVitalData ? {} : { display: 'none' };
@@ -589,7 +595,10 @@ module.exports = React.createClass({
                 </table>
               </div>
             </div>
-            <hr/>
+            <div style={isClosedWarningStyle} className="amp_CaseObservationsPanel_isClosedWarning">
+              <span>{_t("This case has been closed. Editing is not possible anymore.")}</span>
+              <hr/>
+            </div>
           </div>
         );
     },
