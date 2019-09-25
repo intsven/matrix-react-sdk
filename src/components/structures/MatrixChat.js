@@ -992,7 +992,13 @@ export default createReactClass({
                     if (noFederate) createOpts.creation_content = {'m.federate': false};
                     if (invitees) createOpts.invitees = invitees;
                     if (caseData) createOpts.caseData = caseData;
-                    createCase({createOpts}).done();
+                    if (invitees.length === 1) {
+                      const dmUserId = {invitees};
+                      createCase({createOpts}).done();
+                    }
+                    else {
+                      createCase({createOpts}).done();
+                    }
                 }
             },
         });

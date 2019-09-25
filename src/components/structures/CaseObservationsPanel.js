@@ -407,82 +407,99 @@ module.exports = React.createClass({
     },
 
     _parseData: function(mxEv) {
-      console.log("AMP.care Event");
+      if(mxEv.event.type === 'm.room.encrypted'){
+        console.log("AMP.care Event " + mxEv._clearEvent.type);
+      }
+      else{
+        console.log("AMP.care Event " + mxEv.event.type);
+      }
       console.log(mxEv);
-      const content = mxEv._clearEvent.content;
-      if(content === undefined) return;
+      /*
+      let content = mxEv._clearEvent.content;
+      if(content === undefined){
+        // search for unencrypted content
+        content = mxEv.event.content;
+        if(content === undefined){
+          return;
+        }
+      }*/
 
-      if( mxEv.event.state_key === "care.amp.case" ){
-        if(content.title !== undefined) {
-          this.state.caseTitle = content.title;
+      let local_event = mxEv.event;
+      if(mxEv.event.type === 'm.room.encrypted') {
+        local_event = mxEv._clearEvent;
+      }
+
+      if( local_event.type === "care.amp.case" ){
+        if(local_event.content.title !== undefined) {
+          this.state.caseTitle = local_event.content.title;
           this.state.hasCaseData = true;
         }
-        if(content.note !== undefined) {
-          this.state.caseNote = content.note;
+        if(local_event.content.note !== undefined) {
+          this.state.caseNote = local_event.content.note;
           this.state.hasCaseData = true;
         }
-        if(content.severity !== undefined) {
-          this.state.caseSeverity = content.severity;
+        if(local_event.content.severity !== undefined) {
+          this.state.caseSeverity = local_event.content.severity;
           this.state.hasCaseData = true;
         }
-        if(content.requester !== undefined) {
-          this.state.caseRequester = content.requester.reference;
+        if(local_event.content.requester !== undefined) {
+          this.state.caseRequester = local_event.content.requester.reference;
           this.state.hasCaseData = true;
         }
       }
 
-      if( mxEv.event.state_key === "care.amp.patient" ){
-        if(content.name !== undefined){
-            this.state.patientName = content.name;
+      if( local_event.type === "care.amp.patient" ){
+        if(local_event.content.name !== undefined){
+            this.state.patientName = local_event.content.name;
             this.state.hasPatientData = true;
         }
-        if(content.gender !== undefined) {
-          this.state.patientGender = content.gender;
+        if(local_event.content.gender !== undefined) {
+          this.state.patientGender = local_event.content.gender;
           this.state.hasPatientData = true;
         }
-        if(content.birthDate !== undefined) {
-          this.state.patientBirthdate = content.birthDate;
+        if(local_event.content.birthDate !== undefined) {
+          this.state.patientBirthdate = local_event.content.birthDate;
           this.state.hasPatientData = true;
         }
       }
 
-      if( mxEv._clearEvent.type === "care.amp.observation" ){
-        switch(content.id){
+      if( local_event.type === "care.amp.observation" ){
+        switch(local_event.content.id){
           case('heart-rate'):
-            this.state.pulse = content.valueQuantity.value;
+            this.state.pulse = local_event.content.valueQuantity.value;
             this.state.hasVitalData = true;
             break;
           case('glucose'):
-            this.state.bloodSugar = content.valueQuantity.value;
+            this.state.bloodSugar = local_event.content.valueQuantity.value;
             this.state.hasVitalData = true;
             break;
           case('body-temperature'):
-            this.state.temperature = content.valueQuantity.value;
+            this.state.temperature = local_event.content.valueQuantity.value;
             this.state.hasVitalData = true;
             break;
           case('blood-pressure'):
-            this.state.bloodPressureSys = content.component[0].valueQuantity.value;
-            this.state.bloodPressureDia = content.component[1].valueQuantity.value;
+            this.state.bloodPressureSys = local_event.content.component[0].valueQuantity.value;
+            this.state.bloodPressureDia = local_event.content.component[1].valueQuantity.value;
             this.state.hasVitalData = true;
             break;
           case('body-weight'):
-            this.state.weight = content.valueQuantity.value;
+            this.state.weight = local_event.content.valueQuantity.value;
             this.state.hasVitalData = true;
             break;
           case('last-defecation'):
-            this.state.lastDefecation = content.effectiveDateTime;
+            this.state.lastDefecation = local_event.content.effectiveDateTime;
             this.state.hasAnamnesisData = true;
             break;
           case('misc'):
-            this.state.misc = content.valueString;
+            this.state.misc = local_event.content.valueString;
             this.state.hasAnamnesisData = true;
             break;
           case('responsiveness'):
-            this.state.responsiveness = content.valueString;
+            this.state.responsiveness = local_event.content.valueString;
             this.state.hasAnamnesisData = true;
             break;
           case('pain'):
-            this.state.pain = content.valueString;
+            this.state.pain = local_event.content.valueString;
             this.state.hasAnamnesisData = true;
             break;
         }
@@ -503,8 +520,6 @@ module.exports = React.createClass({
         const medicationDataStyle = this.state.hasMedicationData ? {} : { display: 'none' };
         const hideall = this.state.hasCaseData || this.state.hasPatientData || this.state.hasVitalData || this.state.hasAnamnesisData || this.state.hasMedicationData;
         const caseStyle = hideall ? {} : { display: 'none' };
-
-
 
         let severityClass = "amp_CaseObservationsPanel_Severity_info";
         switch(this.state.caseSeverity){
