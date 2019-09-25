@@ -38,10 +38,10 @@ export default React.createClass({
             invitees: [],
             caseTitle: '',
             caseNote: '',
-            caseSeverity: '',
+            caseSeverity: 'info',
             caseRecipient: '',
             patientData_name: '',
-            patientData_gender: '',
+            patientData_gender: 'female',
             patientData_birthDate: '',
             vitalData_bloodpressureSys: '',
             vitalData_bloodpressureDia: '',
@@ -113,7 +113,7 @@ export default React.createClass({
         }
 
         // observation data
-        let observationsContent;
+        let observationsContent = [];
 
         // anamnesis data
         if(this.state.anamnesisData_responsiveness !== ''){
@@ -124,7 +124,7 @@ export default React.createClass({
                 effectiveDateTime: now,
                 valueString: this.state.anamnesisData_responsiveness,
             }
-            observationsContent.append(responsivenessData);
+            observationsContent.push(responsivenessData);
         }
 
         if(this.state.anamnesisData_pain !== ''){
@@ -142,7 +142,7 @@ export default React.createClass({
                 effectiveDateTime: now,
                 valueString: this.state.anamnesisData_pain,
             }
-            observationsContent.append(rpainData);
+            observationsContent.push(painData);
         }
 
         if(this.state.anamnesisData_misc !== ''){
@@ -153,7 +153,7 @@ export default React.createClass({
                 effectiveDateTime: now,
                 valueString: this.state.anamnesisData_misc,
             }
-            observationsContent.append(miscData);
+            observationsContent.push(miscData);
         }
 
         if(this.state.anamnesisData_lastDefecation !== ''){
@@ -163,7 +163,7 @@ export default React.createClass({
                 subject: 'Patient/' + this.state.patientData_name,
                 effectiveDateTime: this.state.anamnesisData_lastDefecation,
             }
-            observationsContent.append(defecationData);
+            observationsContent.push(defecationData);
         }
 
         // vital data
@@ -200,7 +200,7 @@ export default React.createClass({
                 },
                 effectiveDateTime: this.state.vitalData_weightDatetime,
             }
-            observationsContent.append(weightData);
+            observationsContent.push(weightData);
         }
 
         // temperature
@@ -236,7 +236,7 @@ export default React.createClass({
                 },
                 effectiveDateTime: this.state.vitalData_temperatureDatetime,
             }
-            observationsContent.append(temperatureData);
+            observationsContent.push(temperatureData);
         }
 
         // glucose
@@ -272,11 +272,11 @@ export default React.createClass({
                 },
                 effectiveDateTime: this.state.vitalData_sugarDatetime,
             }
-            observationsContent.append(glucoseData);
+            observationsContent.push(glucoseData);
         }
 
         // bloodpressure
-        if(this.state.vitalData_bloodpressure !== ''){
+        if(this.state.vitalData_bloodpressureSys !== '' || this.state.vitalData_bloodpressureDia !== ''){
             let bloodpressureData = {
                 id: 'blood-pressure',
                 resourceType: 'Observation',
@@ -334,7 +334,7 @@ export default React.createClass({
                 },
                 effectiveDateTime: this.state.vitalData_bloodpressureDatetime,
             }
-            observationsContent.append(bloodpressureData);
+            observationsContent.push(bloodpressureData);
         }
 
         // pulse
@@ -370,8 +370,16 @@ export default React.createClass({
                 },
                 effectiveDateTime: this.state.vitalData_pulseDatetime,
             }
-            observationsContent.append(pulseData);
+            observationsContent.push(pulseData);
         }
+
+        content = {
+          caseContent: caseContent,
+          patientContent: patientContent,
+          observationsContent: observationsContent,
+        };
+
+        //debugger;
 
         return(content);
     },
@@ -459,7 +467,7 @@ export default React.createClass({
                           </div>
                           <div className="aw_CreateCaseDialog_input_container">
                             <input id="caseNote" className="aw_CreateCaseDialog_input"
-                                autoFocus={true} size="64"
+                                size="64"
                                 placeholder={_t('Case note')}
                                 onChange={this._onCaseNoteChanged}
                                 value={this.state.caseNote}
