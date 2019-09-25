@@ -138,9 +138,30 @@ function createCase(opts) {
                 description: ((err && err.message) ? err.message : _t("Operation failed")),
             });*/
 
+        //debugger;
 
+        // TODO set room image corresponding to severity
+        let severityIcon;
+        switch(createOpts.caseData.caseContent.severity){
+          case 'critical':
+            severityIcon = require("../res/img/severity_critical.png");
+            break;
+          case 'urgent':
+            severityIcon = require("../res/img/severity_urgent.png");
+            break;
+          case 'request':
+            severityIcon = require("../res/img/severity_request.png");
+            break;
+          case 'info':
+          default:
+            severityIcon = require("../res/img/severity_info.png");
+            break;
         };
 
+        /* TODO
+        const uri = client.uploadContent(severityIcon);
+        client.sendStateEvent(roomId, 'm.room.avatar', {url: uri}, '');
+        */
 
         // send state event case data
         client._sendCompleteEvent(roomId, {
