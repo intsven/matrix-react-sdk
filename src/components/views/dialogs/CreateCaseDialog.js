@@ -108,7 +108,7 @@ export default React.createClass({
         // patient data
         let patientContent = {
             name: this.state.patientData_name,
-            gender: this.state.patientData_genderGender,
+            gender: this.state.patientData_gender,
             birthDate: this.state.patientData_birthDate,
         }
 
@@ -484,7 +484,7 @@ export default React.createClass({
                           <br />
                           <Field id="severity" ref="caseSeverity" label={_t("Severity")} element="select" onChange={this._onCaseSeverityChanged} value={this.state.caseSeverity} >
                               <option value="info">{_t("Info")}</option>
-                              <option value="normal">{_t("Normal")}</option>
+                              <option value="request">{_t("Request")}</option>
                               <option value="urgent">{_t("Urgent")}</option>
                               <option value="critical">{_t("Critical")}</option>
                           </Field>

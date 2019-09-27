@@ -1821,7 +1821,7 @@
     "Severity": "Severity",
     "Critical": "Critical",
     "Urgent": "Urgent",
-    "Normal": "Normal",
+    "Request": "Request",
     "Info": "Info",
     "Patient data": "Patient data",
     "Vital data": "Vital data",
