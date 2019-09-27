@@ -538,15 +538,27 @@ module.exports = React.createClass({
         return (
           <div className={severityClass} style={caseStyle}>
             <div className="amp_CaseObservationsPanel_Patient" style={patientStyle}>
-              {this.state.patientName}
-              {this.state.patientGender}
-              {this.state.patientBirthdate}
+              <table className="amp_CaseObservationsPanel_Table">
+                <tr>
+                  <td><span className="amp_CaseObservationsPanel_patientData">{this.state.patientName}</span></td>
+                  <td><span className="amp_CaseObservationsPanel_patientData">{this.state.patientGender}</span></td>
+                  <td><span className="amp_CaseObservationsPanel_patientData">{this.state.patientBirthdate}</span></td>
+                </tr>
+              </table>
             </div>
             <div className="amp_CaseObservationsPanel_CaseDetails" style={caseDetailsStyle}>
-              {this.state.caseTitle}
-              {this.state.caseNote}
-              {this.state.caseSeverity}
-              {this.state.caseRequester}
+              <table className="amp_CaseObservationsPanel_Table">
+                <tr>
+                  <td><span className="amp_CaseObservationsPanel_caseData">{this.state.caseTitle}</span></td>
+                </tr>
+                <tr>
+                  <td><span className="amp_CaseObservationsPanel_caseData">{this.state.caseNote}</span></td>
+                </tr>
+                <tr>
+                  <td><span className="amp_CaseObservationsPanel_caseData">{this.state.caseSeverity}</span></td>
+                  <td><span className="amp_CaseObservationsPanel_caseData">{this.state.caseRequester}</span></td>
+                </tr>
+              </table>
             </div>
             <div className="amp_CaseObservationsPanel_Observations">
               <div style={vitalDataStyle}>
