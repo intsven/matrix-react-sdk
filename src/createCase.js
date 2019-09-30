@@ -41,6 +41,11 @@ function inviteMultipleToRoom(roomId, addrs) {
     return inviter.invite(addrs).then(states => Promise.resolve({states, inviter}));
 }
 
+function afterCreation(caseData, roomId) {
+  console.log("AMP.care room hast been created");
+  debugger;
+}
+
 /**
  * Create a new case, and switch to it.
  *
@@ -126,21 +131,7 @@ function createCase(opts) {
         }
     }).then(function() {
 
-        // invite recipients
-        if (createOpts.invitees !== undefined) {
-          let inv_res = inviteMultipleToRoom(roomId, createOpts.invitees);
-        }
-        /*client._showAnyInviteErrors(inv_res.states, room, inv_res.inviter).catch((err) => {
-            console.error(err.stack);
-            const ErrorDialog = sdk.getComponent("dialogs.ErrorDialog");
-            Modal.createTrackedDialog('Failed to invite', '', ErrorDialog, {
-                title: _t("Failed to invite"),
-                description: ((err && err.message) ? err.message : _t("Operation failed")),
-            });*/
-
-        //debugger;
-
-        // TODO set room image corresponding to severity
+        // TODO set room avatar corresponding to severity
         let severityIcon;
         switch(createOpts.caseData.caseContent.severity){
           case 'critical':
@@ -158,33 +149,38 @@ function createCase(opts) {
             break;
         };
 
-        /* TODO
-        const uri = client.uploadContent(severityIcon);
-        client.sendStateEvent(roomId, 'm.room.avatar', {url: uri}, '');
+        // TODO
+        /*
+        const uri = client.uploadContent(severityIcon).then(function(res) {
+            client.sendStateEvent(roomId, 'm.room.avatar', {url: uri}, '');
+        });
         */
 
         // send state event case data
         client._sendCompleteEvent(roomId, {
-          type: 'case.amp.case',
-          state_key: 'case.amp.case',
+          type: 'care.amp.case',
+          state_key: 'care.amp.case',
           content: createOpts.caseData.caseContent,
         });
+        console.log("AMP.care sent case content");
 
         // send state event patient data
         client._sendCompleteEvent(roomId, {
-          type: 'case.amp.patient',
-          state_key: 'case.amp.patient',
+          type: 'care.amp.patient',
+          state_key: 'care.amp.patient',
           content: createOpts.caseData.patientContent,
         });
+          console.log("AMP.care sent patient content");
 
         // send observation message events
-        for(let i=0; i<=createOpts.caseData.observationsContent.lenght-1; i++){
+        for(let i=0; i<=createOpts.caseData.observationsContent.length-1; i++){
           client.sendEvent(roomId, 'care.amp.observation', createOpts.caseData.observationsContent[i]).done(() => {
               dis.dispatch({action: 'message_sent'});
           }, (err) => {
               dis.dispatch({action: 'message_send_failed'});
           });
         }
+        console.log("AMP.care sent observation content");
 
         /*
         const localEvent = new Matrix.MatrixEvent(Object.assign(eventObject, {
@@ -213,7 +209,7 @@ function createCase(opts) {
         */
         //client.sendEvent(roomId, 'care.amp.observation', observationsContent);
 
-        return roomId;
+        return Promise.resolve();
     }).then(function() {
         // NB createRoom doesn't block on the client seeing the echo that the
         // room has been created, so we race here with the client knowing that
