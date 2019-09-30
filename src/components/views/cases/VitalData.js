@@ -38,9 +38,6 @@ export default class VitalData extends React.Component {
             oxygen: '',
             oxygenDatetime: '',
         };
-        //propTypes: {
-        //    vitalData: PropTypes.object.isRequired,
-        //}
     }
 
     _onBloodpressureSysChanged = (e) => {

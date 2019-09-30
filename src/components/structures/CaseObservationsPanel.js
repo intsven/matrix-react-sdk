@@ -132,17 +132,35 @@ module.exports = React.createClass({
             patientName: '-',
             patientGender: '-',
             patientBirthdate: '-',
-            weight: '-',
-            temperature: '-',
-            bloodPressureSys: '-',
-            bloodPressureDia: '-',
-            bloodSugar: '-',
-            pulse: '-',
-            oxygen: '-',
-            responsiveness: '-',
-            pain: '-',
-            lastDefecation: '-',
-            misc: '-',
+
+            vitalData_bloodPressureSys: '-',
+            vitalData_bloodPressureDia: '-',
+            vitalData_bloodpressureDatetime: '',
+            vitalData_pulse: '-',
+            vitalData_pulseDatetime: '',
+            vitalData_temperature: '-',
+            vitalData_temperatureDatetime: '',
+            vitalData_bloodSugar: '-',
+            vitalData_bloodSugarDatetime: '',
+            vitalData_weight: '-',
+            vitalData_weightDatetime: '',
+            vitalData_oxygen: '-',
+            vitalData_oxygenDatetime: '',
+            anamnesisData_responsiveness: '',
+            anamnesisData_pain: '',
+            anamnesisData_lastDefecation: '',
+            anamnesisData_misc: '',
+            medicationData_activeAgent: '',
+            medicationData_brand: '',
+            medicationData_strength: '',
+            medicationData_form: '',
+            medicationData_mo: '',
+            medicationData_no: '',
+            medicationData_ev: '',
+            medicationData_ni: '',
+            medicationData_unit: '',
+            medicationData_notes: '',
+            medicationData_reason: '',
             hasCaseData: false,
             hasPatientData: false,
             hasVitalData: false,
@@ -466,40 +484,45 @@ module.exports = React.createClass({
       if( local_event.type === "care.amp.observation" ){
         switch(local_event.content.id){
           case('heart-rate'):
-            this.state.pulse = local_event.content.valueQuantity.value;
+            this.state.vitalData_pulse = local_event.content.valueQuantity.value;
+            this.state.vitalData_pulseDatetime = local_event.content.effectiveDateTime;
             this.state.hasVitalData = true;
             break;
           case('glucose'):
-            this.state.bloodSugar = local_event.content.valueQuantity.value;
+            this.state.vitalData_bloodSugar = local_event.content.valueQuantity.value;
+            this.state.vitalData_bloodSugarDatetime = local_event.content.effectiveDateTime;
             this.state.hasVitalData = true;
             break;
           case('body-temperature'):
-            this.state.temperature = local_event.content.valueQuantity.value;
+            this.state.vitalData_temperature = local_event.content.valueQuantity.value;
+            this.state.vitalData_temperatureDatetime = local_event.content.effectiveDateTime;
             this.state.hasVitalData = true;
             break;
           case('blood-pressure'):
-            this.state.bloodPressureSys = local_event.content.component[0].valueQuantity.value;
-            this.state.bloodPressureDia = local_event.content.component[1].valueQuantity.value;
+            this.state.vitalData_bloodPressureSys = local_event.content.component[0].valueQuantity.value;
+            this.state.vitalData_bloodPressureDia = local_event.content.component[1].valueQuantity.value;
+            this.state.vitalData_bloodpressureDatetime = local_event.content.effectiveDateTime;
             this.state.hasVitalData = true;
             break;
           case('body-weight'):
-            this.state.weight = local_event.content.valueQuantity.value;
+            this.state.vitalData_weight = local_event.content.valueQuantity.value;
+            this.state.vitalData_weightDatetime = local_event.content.effectiveDateTime;
             this.state.hasVitalData = true;
             break;
           case('last-defecation'):
-            this.state.lastDefecation = local_event.content.effectiveDateTime;
+            this.state.anamnesisData_lastDefecation = local_event.content.effectiveDateTime;
             this.state.hasAnamnesisData = true;
             break;
           case('misc'):
-            this.state.misc = local_event.content.valueString;
+            this.state.anamnesisData_misc = local_event.content.valueString;
             this.state.hasAnamnesisData = true;
             break;
           case('responsiveness'):
-            this.state.responsiveness = local_event.content.valueString;
+            this.state.anamnesisData_responsiveness = local_event.content.valueString;
             this.state.hasAnamnesisData = true;
             break;
           case('pain'):
-            this.state.pain = local_event.content.valueString;
+            this.state.anamnesisData_pain = local_event.content.valueString;
             this.state.hasAnamnesisData = true;
             break;
         }
@@ -575,21 +598,39 @@ module.exports = React.createClass({
                     <tbody>
                         <tr className="amp_CaseObservationsPanel_TableRow_Uneven">
                           <td>{_t("Weight")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.weight} kg</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_weight} kg</td>
                           <td>{_t("Temperature")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.temperature} °C</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_temperature} °C</td>
+                        </tr>
+                        <tr className="amp_CaseObservationsPanel_TableRow_Uneven">
+                          <td>{_t("measured")}</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_weightDatetime}</td>
+                          <td>{_t("measured")}</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_temperatureDatetime}</td>
                         </tr>
                         <tr className="amp_CaseObservationsPanel_TableRow_Even">
                           <td>{_t("Blood pressure")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.bloodPressureSys} mmHg / {this.state.bloodPressureDia} mmHg</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_bloodPressureSys} mmHg / {this.state.vitalData_bloodPressureDia} mmHg</td>
                           <td>{_t("Blood sugar")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.bloodSugar} mg/dl</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_bloodSugar} mg/dl</td>
+                        </tr>
+                        <tr className="amp_CaseObservationsPanel_TableRow_Even">
+                          <td>{_t("measured")}</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_bloodpressureDatetime}</td>
+                          <td>{_t("measured")}</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_bloodSugarDatetime}</td>
                         </tr>
                         <tr className="amp_CaseObservationsPanel_TableRow_Uneven">
                           <td>{_t("Pulse")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.pulse} bpm</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_pulse} bpm</td>
                           <td>{_t("Oxygen saturation")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.oxygen} %</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_oxygen} %</td>
+                        </tr>
+                        <tr className="amp_CaseObservationsPanel_TableRow_Uneven">
+                          <td>{_t("measured")}</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_pulseDatetime}</td>
+                          <td>{_t("measured")}</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_oxygenDatetime}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -608,15 +649,15 @@ module.exports = React.createClass({
                     <tbody>
                         <tr className="amp_CaseObservationsPanel_TableRow_Uneven">
                           <td>{_t("Responsiveness")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.responsiveness}</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.anamnesisData_responsiveness}</td>
                           <td>{_t("Pain")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.pain}</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.anamnesisData_pain}</td>
                         </tr>
                         <tr className="amp_CaseObservationsPanel_TableRow_Even">
                           <td>{_t("Last defecation")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.lastDefecation}</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.anamnesisData_lastDefecation}</td>
                           <td>{_t("Misc")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.misc}</td>
+                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.anamnesisData_misc}</td>
                         </tr>
                     </tbody>
                 </table>
