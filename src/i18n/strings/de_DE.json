@@ -1919,6 +1919,11 @@
     "Backup has an <validity>invalid</validity> signature from this device": "Das Backup hat eine <validity> ungültige </validity> Signatur von diesem Gerät.",
     "Show recent room avatars above the room list": "Zeige die letzten Avatare über der Raumliste an (neu laden um Änderungen zu übernehmen)",
 
+
+    "Please help improve AMP.care by sending <UsageDataLink>anonymous usage data</UsageDataLink>. This will use a cookie (please see our <PolicyLink>Cookie Policy</PolicyLink>).": "Bitte hilf uns AMP.care zu verbessern, in dem du <UsageDataLink>anonyme Nutzungsdaten</UsageDataLink> schickst. Dies wird ein Cookie benutzen (bitte beachte auch unsere <PolicyLink>Cookie-Richtlinie</PolicyLink>).",
+    "Please help improve AMP.care by sending <UsageDataLink>anonymous usage data</UsageDataLink>. This will use a cookie.": "Bitte hilf uns AMP.care zu verbessern, in dem du <UsageDataLink>anonyme Nutzungsdaten</UsageDataLink> schickst. Dies wird ein Cookie benutzen.",
+    "The information being sent to us to help make AMP.care better includes:": "Die Informationen, die an uns gesendet werden um AMP.care zu verbessern enthalten:",
+    "The version of AMP.care": "AMP.care Versionsnummer",
     "Cases": "Fälle",
     "New case": "Neuer Fall",
     "Create Case": "Erstelle Fall",

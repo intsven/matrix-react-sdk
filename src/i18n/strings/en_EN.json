@@ -1812,6 +1812,11 @@
     "Failed to remove tag %(tagName)s from room": "Failed to remove tag %(tagName)s from room",
     "Failed to add tag %(tagName)s to room": "Failed to add tag %(tagName)s to room",
 
+
+    "Please help improve AMP.care by sending <UsageDataLink>anonymous usage data</UsageDataLink>. This will use a cookie (please see our <PolicyLink>Cookie Policy</PolicyLink>).": "Please help improve AMP.care by sending <UsageDataLink>anonymous usage data</UsageDataLink>. This will use a cookie (please see our <PolicyLink>Cookie Policy</PolicyLink>).",
+    "Please help improve AMP.care by sending <UsageDataLink>anonymous usage data</UsageDataLink>. This will use a cookie.": "Please help improve AMP.care by sending <UsageDataLink>anonymous usage data</UsageDataLink>. This will use a cookie.",
+    "The information being sent to us to help make AMP.care better includes:": "The information being sent to us to help make AMP.care better includes:",
+    "The version of AMP.care": "The version of AMP.care",
     "Cases": "Cases",
     "New case": "New case",
     "Create Case": "Create Case",
