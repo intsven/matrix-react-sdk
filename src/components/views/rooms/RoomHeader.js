@@ -127,11 +127,45 @@ module.exports = createReactClass({
 
                 // send case closed event
                 const client = MatrixClientPeg.get();
+
+                /*
                 client.sendEvent(this.props.room.roomId, 'care.amp.done', {done: true}).done(() => {
                     dis.dispatch({action: 'message_sent'});
                 }, (err) => {
                     dis.dispatch({action: 'message_send_failed'});
                 });
+                */
+
+                /* TODO changing power levels of users is not allowed in 1:1 rooms
+                // change room permissions to prevent further writing
+                let userList = this.props.room.currentState.getMembers();
+                let users = '{';
+                for(let i=0; i<=userList.length-1; i++){
+                  users += '"' + userList[i].userId + '": 10,';
+                }
+                users += '}';
+                users = '{}';
+                //const content = '{ "events": { "m.room.power_levels": 10 }, "events_default": 50, "state_default": 50, "users": ' + users + ', }';
+
+                const room = client.getRoom(this.props.room.roomId);
+                const plEvent = room.currentState.getStateEvents('m.room.power_levels', '');
+                let plContent = plEvent ? (plEvent.getContent() || {}) : {};
+
+                // Clone the power levels just in case
+                plContent = Object.assign({}, plContent);
+
+                plContent["events_default"] = 50;
+                plContent["invite"] = 50;
+                plContent["events"]["m.room.power_levels"] = 40;
+
+                for (let user in plContent["users"]) {
+                   plContent["users"][user] = 40;
+                }
+
+                console.log("AMP.care: change permissions to");
+                console.log(plContent);
+                client.sendStateEvent(this.props.room.roomId, "m.room.power_levels", plContent);
+                */
             },
         });
     },
