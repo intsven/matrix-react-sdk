@@ -71,6 +71,7 @@ export default React.createClass({
             medicationData_unit: '',
             medicationData_notes: '',
             medicationData_reason: '',
+            noRecipientSelected: false,
         };
     },
 
@@ -78,9 +79,14 @@ export default React.createClass({
       console.log("AMP.care: state test");
       console.log(this.state);
 
-      var caseData = this._parseData();
-      const addrTexts = this.state.invitees.map((addr) => addr.address);
-      this.props.onFinished(true, this.state.caseTitle, false, addrTexts, caseData);
+      if(this.state.invitees.length < 1){
+        this.setState({noRecipientSelected: true});
+      }
+      else {
+        var caseData = this._parseData();
+        const addrTexts = this.state.invitees.map((addr) => addr.address);
+        this.props.onFinished(true, this.state.caseTitle, false, addrTexts, caseData);
+      }
     },
 
     _onCancel: function() {
@@ -421,6 +427,7 @@ export default React.createClass({
         console.log(addrTexts);
         this.setState({
             invitees: addrTexts,
+            noRecipientSelected: false,
         });
       }
     },
@@ -439,8 +446,7 @@ export default React.createClass({
         const AccessibleButton = sdk.getComponent('elements.AccessibleButton');
         const AdressPicker = sdk.getComponent('views.cases.AdressPicker');
 
-        console.log("AMP.care: state test");
-        console.log(this.state);
+        const noRecipientSelected = this.state.noRecipientSelected ? {} : { display: 'none' };
 
         return (
             <BaseDialog className="aw_CreateCaseDialog" onFinished={this.props.onFinished}
@@ -517,6 +523,9 @@ export default React.createClass({
                         </div>
                     </details>
                 </form>
+                <div style={noRecipientSelected}  className="aw_CreateCaseDialog_error">
+                    { _t('No recipient selected') }
+                </div>
                 <DialogButtons primaryButton={_t('Create Case')}
                     onPrimaryButtonClick={this._onOk}
                     onCancel={this._onCancel} />
