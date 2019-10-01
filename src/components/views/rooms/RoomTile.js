@@ -33,6 +33,7 @@ import AccessibleButton from '../elements/AccessibleButton';
 import ActiveRoomObserver from '../../../ActiveRoomObserver';
 import RoomViewStore from '../../../stores/RoomViewStore';
 import SettingsStore from "../../../settings/SettingsStore";
+import {formatDate} from '../../../DateUtils';
 
 module.exports = createReactClass({
     displayName: 'RoomTile',
@@ -361,6 +362,16 @@ module.exports = createReactClass({
         //    incomingCallBox = <IncomingCallBox incomingCall={ this.props.incomingCall }/>;
         //}
 
+        let sender;
+        const selfId = MatrixClientPeg.get().getUserId();
+        const otherMember = this.props.room.currentState.getMembersExcept([selfId])[0];
+        sender = <span className="mx_RoomTile_subtext">{ otherMember.user.displayName }</span>;
+
+        let createDate;
+        const date = new Date(this.props.room.timeline[0].event.origin_server_ts);
+        let dateOfFirstEvent = formatDate(date, false);
+        createDate = <span className="mx_RoomTile_subtext">{ dateOfFirstEvent }</span>;
+
         let contextMenuButton;
         if (!MatrixClientPeg.get().isGuest()) {
             contextMenuButton = <AccessibleButton className="mx_RoomTile_menuButton" onClick={this.onOpenMenu} />;
@@ -396,6 +407,10 @@ module.exports = createReactClass({
                 <div className="mx_RoomTile_labelContainer">
                     { label }
                     { subtextLabel }
+                    <div>
+                      { sender }
+                      { createDate }
+                    </div>
                 </div>
                 { contextMenuButton }
                 { badge }
