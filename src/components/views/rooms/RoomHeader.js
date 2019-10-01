@@ -128,13 +128,13 @@ module.exports = createReactClass({
                 // send case closed event
                 const client = MatrixClientPeg.get();
 
-                /*
-                client.sendEvent(this.props.room.roomId, 'care.amp.done', {done: true}).done(() => {
+                let doneContent = {};
+                doneContent["done"] = true;
+                client.sendEvent(this.props.room.roomId, 'care.amp.done', doneContent).done(() => {
                     dis.dispatch({action: 'message_sent'});
                 }, (err) => {
                     dis.dispatch({action: 'message_send_failed'});
                 });
-                */
 
                 /* TODO changing power levels of users is not allowed in 1:1 rooms
                 // change room permissions to prevent further writing
