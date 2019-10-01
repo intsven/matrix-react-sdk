@@ -15,6 +15,7 @@ limitations under the License.
 */
 
 import React from 'react';
+import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import sdk from '../../../index';
 import SdkConfig from '../../../SdkConfig';
@@ -27,7 +28,7 @@ import Field from "../elements/Field";
 import Modal from "../../../Modal";
 import MatrixClientPeg from '../../../MatrixClientPeg';
 
-export default React.createClass({
+export default createReactClass({
     displayName: 'CreateCaseDialog',
     propTypes: {
         onFinished: PropTypes.func.isRequired,

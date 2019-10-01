@@ -16,10 +16,11 @@ limitations under the License.
 
 import React from "react";
 import PropTypes from 'prop-types';
+import createReactClass from 'create-react-class';
 import {_t} from "../../../languageHandler";
 import Field from "../elements/Field";
 
-module.exports = React.createClass({
+module.exports = createReactClass({
     displayName: "GeneralCaseData",
     propTypes: {
         data: PropTypes.object,

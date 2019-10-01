@@ -21,6 +21,7 @@ import SettingsStore from "../../settings/SettingsStore";
 
 const React = require('react');
 const ReactDOM = require("react-dom");
+import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import Promise from 'bluebird';
 
@@ -56,7 +57,7 @@ if (DEBUG) {
  *
  * Also responsible for handling and sending read receipts.
  */
-const CasePanel = React.createClass({
+const CasePanel = createReactClass({
     displayName: 'CasePanel',
 
     propTypes: {

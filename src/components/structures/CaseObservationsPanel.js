@@ -19,6 +19,7 @@ limitations under the License.
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import createReactClass from 'create-react-class';
 import classNames from 'classnames';
 import shouldHideEvent from '../../shouldHideEvent';
 import {wantsDateSeparator} from '../../DateUtils';
@@ -33,7 +34,8 @@ const continuedTypes = ['m.sticker', 'm.room.message'];
 
 /* (almost) stateless UI component which builds the event tiles in the room timeline.
  */
-module.exports = React.createClass({
+
+module.exports = createReactClass({
     displayName: 'CaseObservationsPanel',
 
     propTypes: {
