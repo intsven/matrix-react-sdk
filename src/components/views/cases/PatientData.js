@@ -26,7 +26,7 @@ export default class PatientData extends React.Component {
         super(props, context);
         this.state = {
             name: '',
-            gender: 'female',
+            gender: 'unknown',
             birthdate: '',
         };
     }
@@ -60,8 +60,10 @@ export default class PatientData extends React.Component {
                                  onChange={this._onNameChanged} />
               <Field id="gender" label={_t("Gender")} element="select"
                      value={this.state.gender} onChange={this._onGenderChanged}>
+                  <option value="unknown">{_t("Unknown")}</option>
                   <option value="female">{_t("Female")}</option>
                   <option value="male">{_t("Male")}</option>
+                  <option value="other">{_t("Other")}</option>
               </Field>
               <Field id="patientBirthday" label={_t("Birthday")}
                                  type="date" value={this.state.birthdate} autoComplete="off"
