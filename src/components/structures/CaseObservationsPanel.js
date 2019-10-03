@@ -619,8 +619,13 @@ module.exports = createReactClass({
               <table className="amp_CaseObservationsPanel_Table">
                 <tbody>
                   <tr>
+                    <td><span className="amp_CaseObservationsPanel_patientData">{_t("Patient name")}</span></td>
+                    <td><span className="amp_CaseObservationsPanel_patientData">{_t("Gender")}</span></td>
+                    <td><span className="amp_CaseObservationsPanel_patientData">{_t("Birthday")}</span></td>
+                  </tr>
+                  <tr>
                     <td><span className="amp_CaseObservationsPanel_patientData">{this.state.patientName}</span></td>
-                    <td><span className="amp_CaseObservationsPanel_patientData">{this.state.patientGender}</span></td>
+                    <td><span className="amp_CaseObservationsPanel_patientData">{_t(this.state.patientGender)}</span></td>
                     <td><span className="amp_CaseObservationsPanel_patientData">{this.state.patientBirthdate}</span></td>
                   </tr>
                 </tbody>
@@ -636,7 +641,7 @@ module.exports = createReactClass({
                     <td><span className="amp_CaseObservationsPanel_caseData">{this.state.caseNote}</span></td>
                   </tr>
                   <tr>
-                    <td><span className="amp_CaseObservationsPanel_caseData">{this.state.caseSeverity}</span></td>
+                    <td><span className="amp_CaseObservationsPanel_caseData">{_t(this.state.caseSeverity)}</span></td>
                     <td><span className="amp_CaseObservationsPanel_caseData">{this.state.caseRequester}</span></td>
                   </tr>
                 </tbody>
