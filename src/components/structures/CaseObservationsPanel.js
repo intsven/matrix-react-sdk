@@ -125,7 +125,7 @@ module.exports = createReactClass({
 
         this._isMounted = true;
 
-        this.state = {
+        this.setState({
             isClosed: false,
             caseTitle: '-',
             caseNote: '-',
@@ -168,7 +168,7 @@ module.exports = createReactClass({
             hasVitalData: false,
             hasAnamnesisData: false,
             hasMedicationData: false,
-        };
+        });
     },
 
     componentWillUnmount: function() {
