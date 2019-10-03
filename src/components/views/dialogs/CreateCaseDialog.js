@@ -42,7 +42,7 @@ export default createReactClass({
             caseSeverity: 'info',
             caseRecipient: '',
             patientData_name: '',
-            patientData_gender: 'female',
+            patientData_gender: 'unknown',
             patientData_birthDate: '',
             vitalData_bloodpressureSys: '',
             vitalData_bloodpressureDia: '',
