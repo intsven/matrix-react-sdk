@@ -1817,6 +1817,8 @@
     "Please help improve AMP.care by sending <UsageDataLink>anonymous usage data</UsageDataLink>. This will use a cookie.": "Please help improve AMP.care by sending <UsageDataLink>anonymous usage data</UsageDataLink>. This will use a cookie.",
     "The information being sent to us to help make AMP.care better includes:": "The information being sent to us to help make AMP.care better includes:",
     "The version of AMP.care": "The version of AMP.care",
+    "Sign in to your AMP.care account": "Sign in to your AMP.care account",
+    "Sign in to your AMP.care account on %(serverName)s": "Sign in to your AMP.care account on %(serverName)s",
     "Cases": "Cases",
     "New case": "New case",
     "Create Case": "Create Case",

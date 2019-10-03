@@ -1923,6 +1923,8 @@
     "Please help improve AMP.care by sending <UsageDataLink>anonymous usage data</UsageDataLink>. This will use a cookie (please see our <PolicyLink>Cookie Policy</PolicyLink>).": "Bitte hilf uns AMP.care zu verbessern, in dem du <UsageDataLink>anonyme Nutzungsdaten</UsageDataLink> schickst. Dies wird ein Cookie benutzen (bitte beachte auch unsere <PolicyLink>Cookie-Richtlinie</PolicyLink>).",
     "Please help improve AMP.care by sending <UsageDataLink>anonymous usage data</UsageDataLink>. This will use a cookie.": "Bitte hilf uns AMP.care zu verbessern, in dem du <UsageDataLink>anonyme Nutzungsdaten</UsageDataLink> schickst. Dies wird ein Cookie benutzen.",
     "The information being sent to us to help make AMP.care better includes:": "Die Informationen, die an uns gesendet werden um AMP.care zu verbessern enthalten:",
+    "Sign in to your AMP.care account": "Melde dich mit deinem AMP.care-Benutzerkonto an",
+    "Sign in to your AMP.care account on %(serverName)s": "Melde dich mit deinem AMP.care-Benutzerkonto auf %(serverName)s an",
     "The version of AMP.care": "AMP.care Versionsnummer",
     "Cases": "Fälle",
     "New case": "Neuer Fall",
