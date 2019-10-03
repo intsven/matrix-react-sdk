@@ -478,7 +478,8 @@ module.exports = createReactClass({
           this.state.hasPatientData = true;
         }
         if(local_event.content.birthDate !== undefined) {
-          this.state.patientBirthdate = local_event.content.birthDate;
+          var date = new Date(local_event.content.birthDate);
+          this.state.patientBirthdate = date.toLocaleDateString();
           this.state.hasPatientData = true;
         }
       }
@@ -487,33 +488,77 @@ module.exports = createReactClass({
         switch(local_event.content.id){
           case('heart-rate'):
             this.state.vitalData_pulse = local_event.content.valueQuantity.value;
-            this.state.vitalData_pulseDatetime = local_event.content.effectiveDateTime;
+            if(local_event.content.effectiveDateTime !== '' && local_event.content.effectiveDateTime !== undefined){
+              var date = new Date(local_event.content.effectiveDateTime);
+              this.state.vitalData_pulseDatetime = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+            }
+            else{
+              this.state.vitalData_pulseDatetime = '-';
+            }
             this.state.hasVitalData = true;
             break;
           case('glucose'):
             this.state.vitalData_bloodSugar = local_event.content.valueQuantity.value;
-            this.state.vitalData_bloodSugarDatetime = local_event.content.effectiveDateTime;
+            if(local_event.content.effectiveDateTime !== '' && local_event.content.effectiveDateTime !== undefined){
+              var date = new Date(local_event.content.effectiveDateTime);
+              this.state.vitalData_bloodSugarDatetime = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+            }
+            else{
+              this.state.vitalData_bloodSugarDatetime = '-';
+            }
             this.state.hasVitalData = true;
             break;
           case('body-temperature'):
             this.state.vitalData_temperature = local_event.content.valueQuantity.value;
-            this.state.vitalData_temperatureDatetime = local_event.content.effectiveDateTime;
+            if(local_event.content.effectiveDateTime !== '' && local_event.content.effectiveDateTime !== undefined){
+              var date = new Date(local_event.content.effectiveDateTime);
+              this.state.vitalData_temperatureDatetime = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+            }
+            else{
+              this.state.vitalData_temperatureDatetime = '-';
+            }
             this.state.hasVitalData = true;
             break;
           case('blood-pressure'):
             this.state.vitalData_bloodPressureSys = local_event.content.component[0].valueQuantity.value;
             this.state.vitalData_bloodPressureDia = local_event.content.component[1].valueQuantity.value;
-            this.state.vitalData_bloodpressureDatetime = local_event.content.effectiveDateTime;
+            if(local_event.content.effectiveDateTime !== '' && local_event.content.effectiveDateTime !== undefined){
+              var date = new Date(local_event.content.effectiveDateTime);
+              this.state.vitalData_bloodpressureDatetime = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+            }
+            else{
+              this.state.vitalData_bloodpressureDatetime = '-';
+            }
             this.state.hasVitalData = true;
             break;
           case('body-weight'):
             this.state.vitalData_weight = local_event.content.valueQuantity.value;
-            this.state.vitalData_weightDatetime = local_event.content.effectiveDateTime;
+            if(local_event.content.effectiveDateTime !== '' && local_event.content.effectiveDateTime !== undefined){
+              var date = new Date(local_event.content.effectiveDateTime);
+              this.state.vitalData_weightDatetime = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+            }
+            else{
+              this.state.vitalData_weightDatetime = '-';
+            }
+            this.state.hasVitalData = true;
+            break;
+          case('oxygen'):
+            this.state.vitalData_oxygen = local_event.content.valueQuantity.value;
+            if(local_event.content.effectiveDateTime !== '' && local_event.content.effectiveDateTime !== undefined){
+              var date = new Date(local_event.content.effectiveDateTime);
+              this.state.vitalData_oxygenDatetime = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+            }
+            else{
+              this.state.vitalData_oxygenDatetime = '-';
+            }
             this.state.hasVitalData = true;
             break;
           case('last-defecation'):
-            this.state.anamnesisData_lastDefecation = local_event.content.effectiveDateTime;
-            this.state.hasAnamnesisData = true;
+            if(local_event.content.effectiveDateTime !== '' && local_event.content.effectiveDateTime !== undefined){
+              var date = new Date(local_event.content.effectiveDateTime);
+              this.state.anamnesisData_lastDefecation = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+              this.state.hasAnamnesisData = true;
+            }
             break;
           case('misc'):
             this.state.anamnesisData_misc = local_event.content.valueString;

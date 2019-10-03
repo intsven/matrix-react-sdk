@@ -94,12 +94,24 @@ export default createReactClass({
         this.props.onFinished(false);
     },
 
+    _formatDate: function(dateString) {
+        if(dateString === '') return '';
+        if(dateString === 'now'){
+          const givenDate = new Date();
+        }
+        else{
+          const givenDate = new Date(dateString);
+        }
+
+        const date = givenDate.getFullYear()+'-'+(givenDate.getMonth()+1)+'-'+givenDate.getDate();
+        const time = givenDate.getHours() + ":" + givenDate.getMinutes() + ":" + givenDate.getSeconds();
+        //const ret = date+'T'+time;
+        const ret = givenDate.toISOString();
+        return ret;
+    },
+
     _parseData: function() {
         let myId = MatrixClientPeg.get().getUserId();
-        var today = new Date();
-        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        var now = date+'T'+time;
         let content;
 
         // case data
@@ -116,7 +128,7 @@ export default createReactClass({
         let patientContent = {
             name: this.state.patientData_name,
             gender: this.state.patientData_gender,
-            birthDate: this.state.patientData_birthDate,
+            birthDate: this._formatDate(this.state.patientData_birthDate),
         }
 
         // observation data
@@ -128,7 +140,7 @@ export default createReactClass({
                 id: 'responsiveness',
                 resourceType: 'Observation',
                 subject: 'Patient/' + this.state.patientData_name,
-                effectiveDateTime: now,
+                effectiveDateTime: this._formatDate('now'),
                 valueString: this.state.anamnesisData_responsiveness,
             }
             observationsContent.push(responsivenessData);
@@ -146,7 +158,7 @@ export default createReactClass({
                     text: 'Pain status'
                 },
                 subject: 'Patient/' + this.state.patientData_name,
-                effectiveDateTime: now,
+                effectiveDateTime: this._formatDate('now'),
                 valueString: this.state.anamnesisData_pain,
             }
             observationsContent.push(painData);
@@ -157,7 +169,7 @@ export default createReactClass({
                 id: 'misc',
                 resourceType: 'Observation',
                 subject: 'Patient/' + this.state.patientData_name,
-                effectiveDateTime: now,
+                effectiveDateTime: this._formatDate('now'),
                 valueString: this.state.anamnesisData_misc,
             }
             observationsContent.push(miscData);
@@ -168,7 +180,7 @@ export default createReactClass({
                 id: 'last-defecation',
                 resourceType: 'Observation',
                 subject: 'Patient/' + this.state.patientData_name,
-                effectiveDateTime: this.state.anamnesisData_lastDefecation,
+                effectiveDateTime: this._formatDate(this.state.anamnesisData_lastDefecation),
             }
             observationsContent.push(defecationData);
         }
@@ -205,7 +217,7 @@ export default createReactClass({
                   unit: 'kg',
                   value: this.state.vitalData_weight,
                 },
-                effectiveDateTime: this.state.vitalData_weightDatetime,
+                effectiveDateTime: this._formatDate(this.state.vitalData_weightDatetime),
             }
             observationsContent.push(weightData);
         }
@@ -241,7 +253,7 @@ export default createReactClass({
                   unit: 'C',
                   value: this.state.vitalData_temperature,
                 },
-                effectiveDateTime: this.state.vitalData_temperatureDatetime,
+                effectiveDateTime: this._formatDate(this.state.vitalData_temperatureDatetime),
             }
             observationsContent.push(temperatureData);
         }
@@ -277,7 +289,7 @@ export default createReactClass({
                   unit: 'mg/dl',
                   value: this.state.vitalData_sugar,
                 },
-                effectiveDateTime: this.state.vitalData_sugarDatetime,
+                effectiveDateTime: this._formatDate(this.state.vitalData_sugarDatetime),
             }
             observationsContent.push(glucoseData);
         }
@@ -339,7 +351,7 @@ export default createReactClass({
                 meta: {
                   profile: 'http://hl7.org/fhir/StructureDefinition/vitalsigns',
                 },
-                effectiveDateTime: this.state.vitalData_bloodpressureDatetime,
+                effectiveDateTime: this._formatDate(this.state.vitalData_bloodpressureDatetime),
             }
             observationsContent.push(bloodpressureData);
         }
@@ -375,7 +387,7 @@ export default createReactClass({
                   unit: 'beats/minute',
                   value: this.state.vitalData_pulse,
                 },
-                effectiveDateTime: this.state.vitalData_pulseDatetime,
+                effectiveDateTime: this._formatDate(this.state.vitalData_pulseDatetime),
             }
             observationsContent.push(pulseData);
         }
