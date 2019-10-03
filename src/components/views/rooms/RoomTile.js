@@ -366,14 +366,14 @@ module.exports = createReactClass({
         const selfId = MatrixClientPeg.get().getUserId();
         const otherMember = this.props.room.currentState.getMembersExcept([selfId])[0];
         if(otherMember.user !== undefined && otherMember.user !== null){
-          sender = <span className="mx_RoomTile_subtext">{ otherMember.user.displayName }</span>;
+          sender = <span className="amp_RoomTile_sender">{ otherMember.user.displayName }</span>;
         }
 
         let createDate;
         if(this.props.room.timeline[0] !== undefined){
           const date = new Date(this.props.room.timeline[0].event.origin_server_ts);
           let dateOfFirstEvent = formatDate(date, false);
-          createDate = <span className="mx_RoomTile_subtext">{ dateOfFirstEvent }</span>;
+          createDate = <span className="amp_RoomTile_createDate">{ dateOfFirstEvent }</span>;
         }
 
         let contextMenuButton;
@@ -411,7 +411,7 @@ module.exports = createReactClass({
                 <div className="mx_RoomTile_labelContainer">
                     { label }
                     { subtextLabel }
-                    <div>
+                    <div className="amp_RoomTile_infoContainer">
                       { sender }
                       { createDate }
                     </div>
