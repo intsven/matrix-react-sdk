@@ -380,6 +380,42 @@ export default createReactClass({
             observationsContent.push(pulseData);
         }
 
+        // oxygen
+        if(this.state.vitalData_oxygen !== ''){
+            let oxygenData = {
+                id: 'oxygen',
+                resourceType: 'Observation',
+                subject: 'Patient/' + this.state.patientData_name,
+                category: {
+                  coding: [{
+                    code: 'vital-signs',
+                    display: 'Vital Signs',
+                    system: 'http://hl7.org/fhir/observation-category',
+                  }],
+                  text: 'Vital Signs',
+                },
+                code: {
+                  coding: [{
+                    code: '59408-5',
+                    display: 'Oxygen saturation in Arterial blood by Pulse oximetry',
+                    system: 'http://loinc.org'
+                  }],
+                  text: 'Oxygen saturation'
+                },
+                meta: {
+                  profile: 'http://hl7.org/fhir/StructureDefinition/vitalsigns',
+                },
+                valueQuantity: {
+                  code: '%',
+                  system: 'http://unitsofmeasure.org',
+                  unit: '%',
+                  value: this.state.vitalData_oxygen,
+                },
+                effectiveDateTime: this._formatDate(this.state.vitalData_oxygenDatetime),
+            }
+            observationsContent.push(oxygenData);
+        }
+
         content = {
           caseContent: caseContent,
           patientContent: patientContent,
