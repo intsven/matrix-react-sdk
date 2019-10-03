@@ -219,7 +219,11 @@ module.exports = createReactClass({
     // TODO: Implement granular (per-room) hide options
     _shouldShowEvent: function(mxEv) {
         // filter for type='care.amp.observation' or state_key='care.amp.patient/care.amp.case'
-        if(mxEv._clearEvent !== undefined){
+        if( mxEv.event.state_key === "care.amp.case" || mxEv.event.state_key === "care.amp.patient"){
+          return true;
+        }
+
+        if(mxEv._clearEvent.type !== undefined){
           if(mxEv._clearEvent.type === "care.amp.observation"){
             return true;
           }
@@ -236,10 +240,7 @@ module.exports = createReactClass({
           return true;
         }
 
-        if( mxEv.event.state_key === "care.amp.case" || mxEv.event.state_key === "care.amp.patient"){
-          return true;
-        }
-
+        // ignore everything else
         return false;
     },
 
@@ -427,8 +428,14 @@ module.exports = createReactClass({
     },
 
     _parseData: function(mxEv) {
+
+      // return if event is not decrypted yet
+      if(mxEv.event.type === 'm.room.encrypted' && mxEv._clearEvent.type === undefined){
+        return;
+      }
+
       if(mxEv.event.type === 'm.room.encrypted'){
-        console.log("AMP.care Event " + mxEv._clearEvent.type);
+        console.log("AMP.care encrypted Event " + mxEv._clearEvent.type);
       }
       else{
         console.log("AMP.care Event " + mxEv.event.type);
@@ -443,6 +450,7 @@ module.exports = createReactClass({
           return;
         }
       }*/
+
 
       let local_event = mxEv.event;
       if(mxEv.event.type === 'm.room.encrypted') {
