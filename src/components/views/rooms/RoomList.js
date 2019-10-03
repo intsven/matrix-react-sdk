@@ -731,7 +731,7 @@ module.exports = createReactClass({
             },
             {
                 list: this.state.lists['im.vector.fake.invite'],
-                label: _t('Invites'),
+                label: _t('New cases'),
                 order: "recent",
                 incomingCall: incomingCallIfTaggedAs('im.vector.fake.invite'),
                 isInvite: true,
