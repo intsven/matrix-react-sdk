@@ -1829,6 +1829,7 @@
     "Title": "Title",
     "Message": "Message",
     "Recipient": "Recipient",
+    "Requester": "Requester",
     "Severity": "Severity",
     "Critical": "Critical",
     "Urgent": "Urgent",

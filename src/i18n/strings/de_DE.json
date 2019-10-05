@@ -1936,6 +1936,7 @@
     "Title": "Titel",
     "Message": "Nachricht",
     "Recipient": "Empfänger",
+    "Requester": "Anfragender",
     "Severity": "Dringlichkeit",
     "Critical": "Kritisch",
     "Urgent": "Dringend",

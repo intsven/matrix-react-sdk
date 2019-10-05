@@ -17,15 +17,21 @@ limitations under the License.
 .amp_CaseObservationsPanel_subheading {
   margin-left: 20px;
   margin-top: 10px;
-  text-decoration: underline;
-  font-family: Arial;
-  font-size: 17px;
+  font-size: 12px;
+  position: relative;
+  left: 10px;
 }
 
 .amp_CaseObservationsPanel_Case {
   padding: 25px;
   border: 2px solid $amp_case_border_color;
   border-radius: 20px;
+}
+
+.amp_CaseObservationsPanel_patientData_header {
+  font-size: 12px;
+  right: 15px;
+  position: relative;
 }
 
 .amp_CaseObservationsPanel_patientData {
@@ -35,10 +41,15 @@ limitations under the License.
   font-size: 17px;
 }
 
+.amp_CaseObservationsPanel_caseData_header {
+  font-size: 12px;
+  right: 15px;
+  position: relative;
+}
+
 .amp_CaseObservationsPanel_caseData {
   text-align: center;
   text-decoration: none;
-  font-family: Arial;
   font-size: 17px;
 }
 
@@ -55,6 +66,16 @@ limitations under the License.
   width: 90%;
 }
 
+.amp_CaseObservationsPanel_Table_patientData {
+  align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  text-align: center;
+}
+
 .amp_CaseObservationsPanel_TableHeader {
 
 }
@@ -62,10 +83,12 @@ limitations under the License.
 .amp_CaseObservationsPanel_TableRow_Uneven {
   background-color: $amp_case_row_color;
   line-height: 30px;
+  font-size: 14px;
 }
 
 .amp_CaseObservationsPanel_TableRow_Even {
   line-height: 30px;
+  font-size: 14px;
 }
 
 .amp_CaseObservationsPanel_TableCell {
@@ -77,25 +100,25 @@ limitations under the License.
 }
 
 .amp_CaseObservationsPanel_Severity_critical {
-  padding: 25px;
+  padding: 15px;
   border: 4px solid $amp_case_severity_critical_color;
   border-radius: 20px;
 }
 
 .amp_CaseObservationsPanel_Severity_urgent {
-  padding: 25px;
+  padding: 15px;
   border: 4px solid $amp_case_severity_urgent_color;
   border-radius: 20px;
 }
 
 .amp_CaseObservationsPanel_Severity_request {
-  padding: 25px;
+  padding: 15px;
   border: 4px solid $amp_case_severity_request_color;
   border-radius: 20px;
 }
 
 .amp_CaseObservationsPanel_Severity_info {
-  padding: 25px;
+  padding: 15px;
   border: 4px solid $amp_case_severity_info_color;
   border-radius: 20px;
 }
@@ -103,7 +126,6 @@ limitations under the License.
 .amp_CaseObservationsPanel_isClosedWarning {
   text-align: center;
   text-decoration: none;
-  font-family: Arial;
-  font-size: 17px;
+  font-size: 18px;
   color: $amp_case_closed_warning_color;
 }

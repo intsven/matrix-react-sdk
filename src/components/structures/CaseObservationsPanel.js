@@ -616,12 +616,12 @@ module.exports = createReactClass({
         return (
           <div className={severityClass} style={caseStyle}>
             <div className="amp_CaseObservationsPanel_Patient" style={patientStyle}>
-              <table className="amp_CaseObservationsPanel_Table">
+              <table className="amp_CaseObservationsPanel_Table_patientData">
                 <tbody>
                   <tr>
-                    <td><span className="amp_CaseObservationsPanel_patientData">{_t("Patient name")}</span></td>
-                    <td><span className="amp_CaseObservationsPanel_patientData">{_t("Gender")}</span></td>
-                    <td><span className="amp_CaseObservationsPanel_patientData">{_t("Birthday")}</span></td>
+                    <td><span className="amp_CaseObservationsPanel_patientData_header">{_t("Patient name")}</span></td>
+                    <td><span className="amp_CaseObservationsPanel_patientData_header">{_t("Gender")}</span></td>
+                    <td><span className="amp_CaseObservationsPanel_patientData_header">{_t("Birthday")}</span></td>
                   </tr>
                   <tr>
                     <td><span className="amp_CaseObservationsPanel_patientData">{this.state.patientName}</span></td>
@@ -635,14 +635,24 @@ module.exports = createReactClass({
               <table className="amp_CaseObservationsPanel_Table">
                 <tbody>
                   <tr>
-                    <td><span className="amp_CaseObservationsPanel_caseData">{this.state.caseTitle}</span></td>
+                    <td><span className="amp_CaseObservationsPanel_caseData_header">{_t("Title")}</span></td>
+                    <td><span className="amp_CaseObservationsPanel_caseData_header">{_t("Severity")}</span></td>
+                    <td><span className="amp_CaseObservationsPanel_caseData_header">{_t("Requester")}</span></td>
+                  </tr>
+                  <tr>
+                    <td width="70%"><span className="amp_CaseObservationsPanel_caseData">{this.state.caseTitle}</span></td>
+                    <td width="10%"><span className="amp_CaseObservationsPanel_caseData">{_t(this.state.caseSeverity)}</span></td>
+                    <td width="20%"><span className="amp_CaseObservationsPanel_caseData">{this.state.caseRequester}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <table className="amp_CaseObservationsPanel_Table">
+                <tbody>
+                  <tr>
+                    <td><span className="amp_CaseObservationsPanel_caseData_header">{_t("Message")}</span></td>
                   </tr>
                   <tr>
                     <td><span className="amp_CaseObservationsPanel_caseData">{this.state.caseNote}</span></td>
-                  </tr>
-                  <tr>
-                    <td><span className="amp_CaseObservationsPanel_caseData">{_t(this.state.caseSeverity)}</span></td>
-                    <td><span className="amp_CaseObservationsPanel_caseData">{this.state.caseRequester}</span></td>
                   </tr>
                 </tbody>
               </table>
