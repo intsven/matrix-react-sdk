@@ -477,15 +477,17 @@ module.exports = createReactClass({
       }
 
       if( local_event.type === "care.amp.patient" ){
-        if(local_event.content.name !== undefined){
+        if(local_event.content.name !== '' && local_event.content.name !== undefined){
             this.state.patientName = local_event.content.name;
             this.state.hasPatientData = true;
         }
         if(local_event.content.gender !== undefined) {
           this.state.patientGender = local_event.content.gender;
-          this.state.hasPatientData = true;
+          if(local_event.content.gender !== 'unknown'){
+            this.state.hasPatientData = true;
+          }
         }
-        if(local_event.content.birthDate !== undefined) {
+        if(local_event.content.birthDate !== '' && local_event.content.birthDate !== undefined) {
           var date = new Date(local_event.content.birthDate);
           this.state.patientBirthdate = date.toLocaleDateString();
           this.state.hasPatientData = true;
