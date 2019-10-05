@@ -449,6 +449,8 @@ module.exports = createReactClass({
 
         // event is encrypted, display padlock corresponding to whether or not it is verified
         if (ev.isEncrypted()) {
+            // AMP.care never display unverified device warning
+            return;
             if (this.state.verified) {
                 return; // no icon for verified
             } else {
