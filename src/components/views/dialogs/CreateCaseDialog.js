@@ -112,6 +112,7 @@ export default createReactClass({
 
     _parseData: function() {
         let myId = MatrixClientPeg.get().getUserId();
+        let myDisplayName = '';
         let content;
 
         // case data
@@ -120,7 +121,8 @@ export default createReactClass({
             note: this.state.caseNote,
             severity: this.state.caseSeverity,
             requester: {
-              reference: myId
+              reference: myId,
+              display: myDisplayName,
             }
         }
 
