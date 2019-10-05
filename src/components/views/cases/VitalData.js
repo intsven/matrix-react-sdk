@@ -134,19 +134,19 @@ export default class VitalData extends React.Component {
 
     render() {
         return (
-            <div className="mx_ProfileSettings_profile">
-                <div className="aw_CaseTab_section">
+            <div className="amp_VitalData_section">
+                <div className="amp_CaseTab_section">
                     <Field id="vitalDataBloodpressureSys" label={_t("Blood pressure systolic")}
                                        type="number" step="1" value={this.state.bloodPressureSys} autoComplete="off"
                                        onChange={this._onBloodpressureSysChanged} />
-                    <Field id="vitalDataBloodpressureSys" label={_t("Blood pressure diastolic")}
+                    <Field id="vitalDataBloodpressureDia" label={_t("Blood pressure diastolic")}
                                        type="number" step="1" value={this.state.bloodPressureDia} autoComplete="off"
                                        onChange={this._onBloodpressureDiaChanged} />
                     <Field id="vitalDataBloodpressureDatetime" label={_t("Blood pressure datetime")}
                                            type="datetime-local" value={this.state.bloodpressureDatetime} autoComplete="off"
                                            onChange={this._onBloodpressureDatetimeChanged} />
                 </div>
-                <div className="aw_CaseTab_section">
+                <div className="amp_CaseTab_section">
                     <Field id="vitalDataPulse" label={_t("Pulse")}
                                        type="number" step="1" value={this.state.pulse} autoComplete="off"
                                        onChange={this._onPulseChanged} />
@@ -154,7 +154,7 @@ export default class VitalData extends React.Component {
                                            type="datetime-local" value={this.state.pulseDatetime} autoComplete="off"
                                            onChange={this._onPulseDatetimeChanged} />
                 </div>
-                <div className="aw_CaseTab_section">
+                <div className="amp_CaseTab_section">
                     <Field id="vitalDataTemperature" label={_t("Temperature")}
                                        type="number" step="0.01" value={this.state.temperature} autoComplete="off"
                                        onChange={this._onTemperatureChanged} />
@@ -162,7 +162,7 @@ export default class VitalData extends React.Component {
                                            type="datetime-local" value={this.state.temperatureDatetime} autoComplete="off"
                                            onChange={this._onTemperatureDatetimeChanged} />
                 </div>
-                <div className="aw_CaseTab_section">
+                <div className="amp_CaseTab_section">
                     <Field id="vitalDataBloodsugar" label={_t("Blood sugar")}
                                        type="number" step="1" value={this.state.sugar} autoComplete="off"
                                        onChange={this._onSugarChanged} />
@@ -170,7 +170,7 @@ export default class VitalData extends React.Component {
                                            type="datetime-local" value={this.state.sugarDatetime} autoComplete="off"
                                            onChange={this._onSugarDatetimeChanged} />
                 </div>
-                <div className="aw_CaseTab_section">
+                <div className="amp_CaseTab_section">
                     <Field id="vitalDataWeight" label={_t("Weight")}
                                        type="number" step="0.01" value={this.state.weight} autoComplete="off"
                                        onChange={this._onWeightChanged} />
@@ -178,7 +178,7 @@ export default class VitalData extends React.Component {
                                            type="datetime-local" value={this.state.weightDatetime} autoComplete="off"
                                            onChange={this._onWeightDatetimeChanged} />
                 </div>
-                <div className="aw_CaseTab_section">
+                <div className="amp_CaseTab_section">
                     <Field id="vitalDataOxygen" label={_t("Oxygen saturation")}
                                        type="number" step="0.01" value={this.state.oxygen} autoComplete="off"
                                        onChange={this._onOxygenChanged} />

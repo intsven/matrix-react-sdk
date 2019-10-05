@@ -557,7 +557,7 @@ module.exports = createReactClass({
                 rows="1"
                 id="textinput"
                 ref="textinput"
-                className="mx_AddressPickerDialog_input"
+                className="amp_AddressPickerDialog_input"
                 onChange={this.onQueryChanged}
                 placeholder={this.props.placeholder}
                 defaultValue={this.props.value}
@@ -569,7 +569,7 @@ module.exports = createReactClass({
         let addressSelector;
         if (this.state.error) {
             const validTypeDescriptions = this.props.validAddressTypes.map((t) => _t(addressTypeName[t]));
-            error = <div className="mx_AddressPickerDialog_error">
+            error = <div className="amp_AddressPickerDialog_error">
                 { _t("You have entered an invalid address.") }
                 <br />
                 { _t("Try using one of the following valid address types: %(validTypesList)s.", {
@@ -577,9 +577,9 @@ module.exports = createReactClass({
                 }) }
             </div>;
         } else if (this.state.searchError) {
-            error = <div className="mx_AddressPickerDialog_error">{ this.state.searchError }</div>;
+            error = <div className="amp_AddressPickerDialog_error">{ this.state.searchError }</div>;
         } else if (this.state.query.length > 0 && filteredSuggestedList.length === 0 && !this.state.busy) {
-            error = <div className="mx_AddressPickerDialog_error">{ _t("No results") }</div>;
+            error = <div className="amp_AddressPickerDialog_error">{ _t("No results") }</div>;
         } else {
             addressSelector = (
                 <AddressSelector ref={(ref) => {this.addressSelector = ref;}}
@@ -592,8 +592,8 @@ module.exports = createReactClass({
         }
 
         return (
-                <div className="mx_Dialog_content">
-                    <div className="mx_AddressPickerDialog_inputContainer">{ query }</div>
+                <div className="amp_Dialog_content">
+                    <div className="amp_AddressPickerDialog_inputContainer">{ query }</div>
                     { error }
                     { addressSelector }
                 </div>

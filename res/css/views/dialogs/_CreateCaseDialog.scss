@@ -14,20 +14,41 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-.aw_CreateCaseDialog_details_summary {
+.amp_CreateCaseDialog {
+
+}
+
+.amp_Dialog_content {
+
+}
+
+.amp_CreateCaseDialog_details {
+
+}
+
+.amp_CreateCaseDialog_details_summary {
     outline: none;
 }
 
-.aw_CreateCaseDialog_label {
-    text-align: left;
-    padding-bottom: 12px;
+.amp_CaseTab_section {
+    display: flex;
 }
 
-.aw_CreateCaseDialog_input_container {
+.amp_VitalData_section {
+  
+}
+
+.amp_CreateCaseDialog_label {
+    text-align: left;
+    padding-top: 6px;
+    font-size: 12px;
+}
+
+.amp_CreateCaseDialog_input_container {
     padding-right: 20px;
 }
 
-.aw_CreateCaseDialog_input {
+.amp_CreateCaseDialog_input {
     font-size: 15px;
     border-radius: 3px;
     border: 1px solid $input-border-color;
@@ -37,7 +58,7 @@ limitations under the License.
     width: 100%;
 }
 
-.aw_CreateCaseDialog_error {
+.amp_CreateCaseDialog_error {
   text-align: center;
   text-decoration: none;
   font-family: Arial;
