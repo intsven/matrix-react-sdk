@@ -394,6 +394,45 @@ module.exports = createReactClass({
             />;
         }
 
+        // check if room has a severity
+        let severity;
+        for (let i=0; i <= this.props.room.timeline.length-1; i++) {
+          if(this.props.room.timeline[i].event.type === 'care.amp.case') {
+              severity = this.props.room.timeline[i].event.content.severity;
+          }
+          else if (this.props.room.timeline[i].event.type === 'm.room.encrypted') {
+            if (this.props.room.timeline[i]._clearEvent.type === 'care.amp.case'){
+              severity = this.props.room.timeline[i]._clearEvent.content.severity;
+            }
+          }
+        }
+        if(severity) {
+          let severityIcon;
+          switch(severity){
+            case 'critical':
+              severityIcon = require("../../../../res/img/icon_severity_critical.svg");
+              break;
+            case 'urgent':
+              severityIcon = require("../../../../res/img/icon_severity_urgent.svg");
+              break;
+            case 'request':
+              severityIcon = require("../../../../res/img/icon_severity_request.svg");
+              break;
+            case 'info':
+            default:
+              severityIcon = require("../../../../res/img/icon_severity_info.svg");
+              break;
+          }
+
+          dmIndicator = <img
+              src={severityIcon}
+              className="mx_RoomTile_dm"
+              width="13"
+              height="13"
+              alt={severity}
+          />;
+        }
+
         return <AccessibleButton tabIndex="0"
                                  className={classes}
                                  onClick={this.onClick}
