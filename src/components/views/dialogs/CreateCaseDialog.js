@@ -96,16 +96,14 @@ export default createReactClass({
 
     _formatDate: function(dateString) {
         if(dateString === '') return '';
+
+        let givenDate;
         if(dateString === 'now'){
-          const givenDate = new Date();
+          givenDate = new Date();
         }
         else{
-          const givenDate = new Date(dateString);
+          givenDate = new Date(dateString);
         }
-
-        const date = givenDate.getFullYear()+'-'+(givenDate.getMonth()+1)+'-'+givenDate.getDate();
-        const time = givenDate.getHours() + ":" + givenDate.getMinutes() + ":" + givenDate.getSeconds();
-        //const ret = date+'T'+time;
         const ret = givenDate.toISOString();
         return ret;
     },
