@@ -136,10 +136,10 @@ export default class VitalData extends React.Component {
         return (
             <div className="amp_VitalData_section">
                 <div className="amp_CaseTab_section">
-                    <Field id="vitalDataBloodpressureSys" label={_t("Blood pressure systolic")}
+                    <Field id="vitalDataBloodpressureSys" label={_t("Blood pressure systolic in mm/Hg")}
                                        type="number" step="1" value={this.state.bloodPressureSys} autoComplete="off"
                                        onChange={this._onBloodpressureSysChanged} />
-                    <Field id="vitalDataBloodpressureDia" label={_t("Blood pressure diastolic")}
+                    <Field id="vitalDataBloodpressureDia" label={_t("Blood pressure diastolic in mm/Hg")}
                                        type="number" step="1" value={this.state.bloodPressureDia} autoComplete="off"
                                        onChange={this._onBloodpressureDiaChanged} />
                     <Field id="vitalDataBloodpressureDatetime" label={_t("Blood pressure datetime")}
@@ -147,7 +147,7 @@ export default class VitalData extends React.Component {
                                            onChange={this._onBloodpressureDatetimeChanged} />
                 </div>
                 <div className="amp_CaseTab_section">
-                    <Field id="vitalDataPulse" label={_t("Pulse")}
+                    <Field id="vitalDataPulse" label={_t("Pulse in bpm")}
                                        type="number" step="1" value={this.state.pulse} autoComplete="off"
                                        onChange={this._onPulseChanged} />
                     <Field id="vitalDataPulseDatetime" label={_t("Pulse datetime")}
@@ -155,7 +155,7 @@ export default class VitalData extends React.Component {
                                            onChange={this._onPulseDatetimeChanged} />
                 </div>
                 <div className="amp_CaseTab_section">
-                    <Field id="vitalDataTemperature" label={_t("Temperature")}
+                    <Field id="vitalDataTemperature" label={_t("Temperature in °C")}
                                        type="number" step="0.01" value={this.state.temperature} autoComplete="off"
                                        onChange={this._onTemperatureChanged} />
                     <Field id="vitalDataTemperatureDatetime" label={_t("Temperature datetime")}
@@ -163,7 +163,7 @@ export default class VitalData extends React.Component {
                                            onChange={this._onTemperatureDatetimeChanged} />
                 </div>
                 <div className="amp_CaseTab_section">
-                    <Field id="vitalDataBloodsugar" label={_t("Blood sugar")}
+                    <Field id="vitalDataBloodsugar" label={_t("Blood sugar in mg/dl")}
                                        type="number" step="1" value={this.state.sugar} autoComplete="off"
                                        onChange={this._onSugarChanged} />
                     <Field id="vitalDataBloodsugarDatetime" label={_t("Blood sugar datetime")}
@@ -171,7 +171,7 @@ export default class VitalData extends React.Component {
                                            onChange={this._onSugarDatetimeChanged} />
                 </div>
                 <div className="amp_CaseTab_section">
-                    <Field id="vitalDataWeight" label={_t("Weight")}
+                    <Field id="vitalDataWeight" label={_t("Weight in kg")}
                                        type="number" step="0.01" value={this.state.weight} autoComplete="off"
                                        onChange={this._onWeightChanged} />
                     <Field id="vitalDataWeightDatetime" label={_t("Weight datetime")}
@@ -179,7 +179,7 @@ export default class VitalData extends React.Component {
                                            onChange={this._onWeightDatetimeChanged} />
                 </div>
                 <div className="amp_CaseTab_section">
-                    <Field id="vitalDataOxygen" label={_t("Oxygen saturation")}
+                    <Field id="vitalDataOxygen" label={_t("Oxygen saturation in %")}
                                        type="number" step="0.01" value={this.state.oxygen} autoComplete="off"
                                        onChange={this._onOxygenChanged} />
                     <Field id="vitalDataOxygenDatetime" label={_t("Oxygen saturation datetime")}
