@@ -56,17 +56,17 @@ export default class PatientData extends React.Component {
     render() {
         return (
           <div className="mx_ProfileSettings_profile">
-              <Field id="patientPatientName" className="vitals_field" label={_t("Patient name")}
+              <Field id="patientPatientName" className="amp_CreateCaseDialog_input_field" label={_t("Patient name")}
                                  type="text" value={this.state.name} autoComplete="off"
                                  onChange={this._onNameChanged} />
-              <Field id="gender" className="vitals_field" label={_t("Gender")} element="select"
+              <Field id="gender" className="amp_CreateCaseDialog_input_field" label={_t("Gender")} element="select"
                      value={this.state.gender} onChange={this._onGenderChanged}>
                   <option value="unknown">{_t("Unknown")}</option>
                   <option value="female">{_t("Female")}</option>
                   <option value="male">{_t("Male")}</option>
                   <option value="other">{_t("Other")}</option>
               </Field>
-              <Field id="patientBirthday" className="vitals_field" label={_t("Birthday")}
+              <Field id="patientBirthday" className="amp_CreateCaseDialog_input_field" label={_t("Birthday")}
                                  type="date" value={this.state.birthdate} autoComplete="off"
                                  onChange={this._onBirthdateChanged} />
           </div>

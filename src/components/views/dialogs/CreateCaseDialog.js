@@ -525,7 +525,7 @@ export default createReactClass({
                     <div className="amp_Dialog_content">
                       <div>
                           <div className="amp_CaseTab_section">
-                            <Field id="caseTitle" className="vitals_field"
+                            <Field id="caseTitle" className="amp_CreateCaseDialog_input_field"
                                 autoFocus={true} size="64"
                                 label={_t('Case title')}
                                 autoComplete="off"
@@ -533,7 +533,7 @@ export default createReactClass({
                                 onChange={this._onCaseTitleChanged}
                                 value={this.state.caseTitle}
                             />
-                            <Field id="severity" ref="caseSeverity" className="vitals_field" label={_t("Severity")} element="select" onChange={this._onCaseSeverityChanged} value={this.state.caseSeverity} >
+                            <Field id="severity" ref="caseSeverity" className="amp_CreateCaseDialog_input_field" label={_t("Severity")} element="select" onChange={this._onCaseSeverityChanged} value={this.state.caseSeverity} >
                               <option id="severityInfo" value="info"      style={{backgroundColor: '#45ABF2'}}>{_t("Info")}</option>
                               <option id="severityRequest" value="request"   style={{backgroundColor: '#26DE82'}}>{_t("Request")}</option>
                               <option id="severityUrgent" value="urgent"    style={{backgroundColor: '#F7C930'}}>{_t("Urgent")}</option>
@@ -542,7 +542,7 @@ export default createReactClass({
                           </div>
 
                           <div className="amp_CaseTab_section">
-                            <Field id="caseNote" className="vitals_field"
+                            <Field id="caseNote" className="amp_CreateCaseDialog_input_field"
                                 label={_t('Case note')}
                                 element="textarea"
                                 onChange={this._onCaseNoteChanged}
@@ -550,10 +550,10 @@ export default createReactClass({
                             />
                           </div>
 
-                          <div className="amp_CreateCaseDialog_label vitals_field">
+                          <div className="amp_CreateCaseDialog_label amp_CreateCaseDialog_input_field">
                               <label htmlFor="textinput"> { _t('Recipient') } </label>
                           </div>
-                          <div className="vitals_field">
+                          <div className="amp_CreateCaseDialog_input_field">
                             <AdressPicker focus={false} onSelectedListChanged={this._onRecipientChanged} placeholder={ _t('Name or AMP.care ID') }/>
                           </div>
                           
