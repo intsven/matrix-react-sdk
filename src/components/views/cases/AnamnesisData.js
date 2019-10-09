@@ -60,19 +60,23 @@ export default class AnamnesisData extends React.Component {
 
     render() {
         return (
-            <div className="mx_ProfileSettings_profile">
-            <Field id="profileDisplayName" label={_t("Responsiveness")}
+            <div>
+                <div className="mx_ProfileSettings_profile">
+            <Field id="profileDisplayName" className="vitals_field" label={_t("Responsiveness")}
                                type="text" value={this.state.responsiveness} autoComplete="off"
-                               onChange={this._onResponsivenessChanged} /><br/>
-            <Field id="profileDisplayName" label={_t("Pain")}
+                               onChange={this._onResponsivenessChanged} />
+            <Field id="profileDisplayName" className="vitals_field" label={_t("Pain")}
                                type="text" value={this.state.pain} autoComplete="off"
-                               onChange={this._onPainChanged} /><br/>
-            <Field id="profileDisplayName" label={_t("Last defecation")}
+                               onChange={this._onPainChanged} />
+            <Field id="profileDisplayName" className="vitals_field" label={_t("Last defecation")}
                                type="datetime-local" value={this.state.lastDefecation} autoComplete="off"
-                               onChange={this._onLastDefecationChanged} /><br/>
-            <Field id="profileDisplayName" label={_t("Misc")}
+                               onChange={this._onLastDefecationChanged} />
+                </div>
+                <div>
+            <Field id="profileDisplayName" className="vitals_field" label={_t("Misc")}
                                type="text" value={this.state.misc} autoComplete="off"
-                               onChange={this._onMiscChanged} /><br/>
+                               onChange={this._onMiscChanged} />
+                </div>
             </div>
         );
     }

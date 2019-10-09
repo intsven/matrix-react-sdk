@@ -23,19 +23,24 @@ limitations under the License.
 }
 
 .amp_CreateCaseDialog_details {
-
+    border: 1px solid $input-border-color;
+    border-radius: 3px;
+    padding: 9px;
 }
 
 .amp_CreateCaseDialog_details_summary {
     outline: none;
+    font-size: 17px;
 }
 
 .amp_CaseTab_section {
     display: flex;
+    min-width: auto;
 }
 
 .amp_VitalData_section {
-  
+    margin: 0px;
+    padding: 0px;
 }
 
 .amp_CreateCaseDialog_label {
@@ -55,7 +60,7 @@ limitations under the License.
     padding: 9px;
     color: $primary-fg-color;
     background-color: $primary-bg-color;
-    width: 100%;
+    //width: 100%;
 }
 
 .amp_CreateCaseDialog_error {
@@ -64,4 +69,9 @@ limitations under the License.
   font-family: Arial;
   font-size: 17px;
   color: $amp_no_recipient_warning_color;
+}
+
+.vitals_field {
+    margin: 0.5em !important;
+    padding: 0px;
 }
