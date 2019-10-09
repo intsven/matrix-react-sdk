@@ -544,6 +544,7 @@ export default createReactClass({
                           <div className="amp_CaseTab_section">
                             <Field id="caseNote" className="vitals_field"
                                 label={_t('Case note')}
+                                element="textarea"
                                 onChange={this._onCaseNoteChanged}
                                 value={this.state.caseNote}
                             />
