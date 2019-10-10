@@ -353,3 +353,11 @@ $amp_no_recipient_warning_color: #eb3b59;
     color: $accent-color;
     text-decoration: none;
 }
+
+
+:export {
+    amp_case_severity_critical_color: $amp_case_severity_critical_color;
+    amp_case_severity_urgent_color: $amp_case_severity_urgent_color;
+    amp_case_severity_request_color: $amp_case_severity_request_color;
+    amp_case_severity_info_color: $amp_case_severity_info_color;
+}

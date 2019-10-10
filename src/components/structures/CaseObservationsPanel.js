@@ -7,7 +7,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,6 +25,7 @@ import shouldHideEvent from '../../shouldHideEvent';
 import {wantsDateSeparator} from '../../DateUtils';
 import sdk from '../../index';
 import {_t} from "../../languageHandler";
+import Field from "../views/elements/Field";
 
 import MatrixClientPeg from '../../MatrixClientPeg';
 import SettingsStore from '../../settings/SettingsStore';
@@ -137,21 +138,21 @@ module.exports = createReactClass({
 
             vitalData_bloodPressureSys: '-',
             vitalData_bloodPressureDia: '-',
-            vitalData_bloodpressureDatetime: '',
+            vitalData_bloodpressureDatetime: '-',
             vitalData_pulse: '-',
-            vitalData_pulseDatetime: '',
+            vitalData_pulseDatetime: '-',
             vitalData_temperature: '-',
-            vitalData_temperatureDatetime: '',
+            vitalData_temperatureDatetime: '-',
             vitalData_bloodSugar: '-',
-            vitalData_bloodSugarDatetime: '',
+            vitalData_bloodSugarDatetime: '-',
             vitalData_weight: '-',
-            vitalData_weightDatetime: '',
+            vitalData_weightDatetime: '-',
             vitalData_oxygen: '-',
-            vitalData_oxygenDatetime: '',
-            anamnesisData_responsiveness: '',
-            anamnesisData_pain: '',
-            anamnesisData_lastDefecation: '',
-            anamnesisData_misc: '',
+            vitalData_oxygenDatetime: '-',
+            anamnesisData_responsiveness: '-',
+            anamnesisData_pain: '-',
+            anamnesisData_lastDefecation: '-',
+            anamnesisData_misc: '-',
             medicationData_activeAgent: '',
             medicationData_brand: '',
             medicationData_strength: '',
@@ -590,160 +591,208 @@ module.exports = createReactClass({
       }
     },
 
-    render: function() {
+  componentDidMount() {
+    let severityClass = "amp_Severity_info";
+    switch(this.state.caseSeverity){
+      case('critical'):
+      severityClass = "amp_Severity_critical";
+      break;
+      case('urgent'):
+      severityClass = "amp_Severity_urgent";
+      break;
+      case('request'):
+      severityClass = "amp_Severity_request";
+      break;
+    }
 
-        const isClosedWarningStyle = this.state.isClosed ? {} : { display: 'none' };
-        const caseDetailsStyle = this.state.hasCaseData ? {} : { display: 'none' };
-        const patientStyle = this.state.hasPatientData ? {} : { display: 'none' };
-        const vitalDataStyle = this.state.hasVitalData ? {} : { display: 'none' };
-        const anamnesisDataStyle = this.state.hasAnamnesisData ? {} : { display: 'none' };
-        const medicationDataStyle = this.state.hasMedicationData ? {} : { display: 'none' };
-        const hideall = this.state.hasCaseData || this.state.hasPatientData || this.state.hasVitalData || this.state.hasAnamnesisData || this.state.hasMedicationData;
-        const caseStyle = hideall ? {} : { display: 'none' };
+    document.getElementById("caseSeverity").classList.add(severityClass);
+    document.getElementById("caseNote").classList.add("amp_Textarea_noresize");
+    
+  },
 
-        let severityClass = "amp_CaseObservationsPanel_Severity_info";
-        switch(this.state.caseSeverity){
-          case('critical'):
-            severityClass = "amp_CaseObservationsPanel_Severity_critical";
-            break;
-          case('urgent'):
-            severityClass = "amp_CaseObservationsPanel_Severity_urgent";
-            break;
-          case('request'):
-            severityClass = "amp_CaseObservationsPanel_Severity_request";
-            break;
-        }
-        this._getEventTiles();
+  render: function() {
 
-        return (
-          <div className={severityClass} style={caseStyle}>
-            <div className="amp_CaseObservationsPanel_Patient" style={patientStyle}>
-              <table className="amp_CaseObservationsPanel_Table_patientData">
-                <tbody>
-                  <tr>
-                    <td><span className="amp_CaseObservationsPanel_patientData_header">{_t("Patient name")}</span></td>
-                    <td><span className="amp_CaseObservationsPanel_patientData_header">{_t("Gender")}</span></td>
-                    <td><span className="amp_CaseObservationsPanel_patientData_header">{_t("Birthday")}</span></td>
-                  </tr>
-                  <tr>
-                    <td><span className="amp_CaseObservationsPanel_patientData">{this.state.patientName}</span></td>
-                    <td><span className="amp_CaseObservationsPanel_patientData">{_t(this.state.patientGender)}</span></td>
-                    <td><span className="amp_CaseObservationsPanel_patientData">{this.state.patientBirthdate}</span></td>
-                  </tr>
-                </tbody>
-              </table>
+    const isClosedWarningStyle = this.state.isClosed ? {} : { display: 'none' };
+    const caseDetailsStyle = this.state.hasCaseData ? {} : { display: 'none' };
+    const patientStyle = this.state.hasPatientData ? {} : { display: 'none' };
+    const vitalDataStyle = this.state.hasVitalData ? {} : { display: 'none' };
+    const anamnesisDataStyle = this.state.hasAnamnesisData ? {} : { display: 'none' };
+    const medicationDataStyle = this.state.hasMedicationData ? {} : { display: 'none' };
+    const hideall = this.state.hasCaseData || this.state.hasPatientData || this.state.hasVitalData || this.state.hasAnamnesisData || this.state.hasMedicationData;
+    const caseStyle = hideall ? {} : { display: 'none' };
+    this._getEventTiles();
+
+    
+    
+
+    
+    return (
+    <div>
+      <div className="amp_CaseTab_section">
+        <div className="amp_Dialog_content amp_Display_content">
+          <div>
+            <div className="amp_CaseTab_section">
+              <Field id="caseTitle" className="amp_CreateCaseDialog_display_field"
+                autoFocus={true} size="64"
+                label={_t('Case title')}
+                autoComplete="off"
+                type="text"	
+                readOnly
+                onChange={this._onCaseTitleChanged}
+                value={this.state.caseTitle}
+              />
+              <Field id="caseSeverity" ref="caseSeverity" className="amp_CreateCaseDialog_display_field" label={_t("Severity")} readOnly onChange={this._onCaseSeverityChanged} value={_t(this.state.caseSeverity)} >
+              </Field>
             </div>
-            <div className="amp_CaseObservationsPanel_CaseDetails" style={caseDetailsStyle}>
-              <table className="amp_CaseObservationsPanel_Table">
-                <tbody>
-                  <tr>
-                    <td><span className="amp_CaseObservationsPanel_caseData_header">{_t("Title")}</span></td>
-                    <td><span className="amp_CaseObservationsPanel_caseData_header">{_t("Severity")}</span></td>
-                    <td><span className="amp_CaseObservationsPanel_caseData_header">{_t("Requester")}</span></td>
-                  </tr>
-                  <tr>
-                    <td width="70%"><span className="amp_CaseObservationsPanel_caseData">{this.state.caseTitle}</span></td>
-                    <td width="10%"><span className="amp_CaseObservationsPanel_caseData">{_t(this.state.caseSeverity)}</span></td>
-                    <td width="20%"><span className="amp_CaseObservationsPanel_caseData">{this.state.caseRequester}</span></td>
-                  </tr>
-                </tbody>
-              </table>
-              <table className="amp_CaseObservationsPanel_Table">
-                <tbody>
-                  <tr>
-                    <td><span className="amp_CaseObservationsPanel_caseData_header">{_t("Message")}</span></td>
-                  </tr>
-                  <tr>
-                    <td><span className="amp_CaseObservationsPanel_caseData">{this.state.caseNote}</span></td>
-                  </tr>
-                </tbody>
-              </table>
+
+            <div className="amp_CaseTab_section">
+              <Field id="caseNote" className="amp_CreateCaseDialog_display_field"
+                label={_t('Case note')}
+                element="textarea"
+                rows={this.state.caseNote.split(/\r\n|\r|\n/).length}
+                onChange={this._onCaseNoteChanged}
+                value={this.state.caseNote}
+                readOnly
+              />
             </div>
-            <div className="amp_CaseObservationsPanel_Observations">
-              <div style={vitalDataStyle}>
-                <span className="amp_CaseObservationsPanel_subheading">{_t("Vital data")}</span>
-                <table className="amp_CaseObservationsPanel_Table">
-                    <thead>
-                        <tr>
-                            <th width="25%"></th>
-                            <th width="25%"></th>
-                            <th width="25%"></th>
-                            <th width="25%"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr className="amp_CaseObservationsPanel_TableRow_Uneven">
-                          <td>{_t("Weight")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_weight} kg</td>
-                          <td>{_t("Temperature")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_temperature} °C</td>
-                        </tr>
-                        <tr className="amp_CaseObservationsPanel_TableRow_Uneven">
-                          <td>{_t("measured")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_weightDatetime}</td>
-                          <td>{_t("measured")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_temperatureDatetime}</td>
-                        </tr>
-                        <tr className="amp_CaseObservationsPanel_TableRow_Even">
-                          <td>{_t("Blood pressure")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_bloodPressureSys} mmHg / {this.state.vitalData_bloodPressureDia} mmHg</td>
-                          <td>{_t("Blood sugar")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_bloodSugar} mg/dl</td>
-                        </tr>
-                        <tr className="amp_CaseObservationsPanel_TableRow_Even">
-                          <td>{_t("measured")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_bloodpressureDatetime}</td>
-                          <td>{_t("measured")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_bloodSugarDatetime}</td>
-                        </tr>
-                        <tr className="amp_CaseObservationsPanel_TableRow_Uneven">
-                          <td>{_t("Pulse")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_pulse} bpm</td>
-                          <td>{_t("Oxygen saturation")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_oxygen} %</td>
-                        </tr>
-                        <tr className="amp_CaseObservationsPanel_TableRow_Uneven">
-                          <td>{_t("measured")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_pulseDatetime}</td>
-                          <td>{_t("measured")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.vitalData_oxygenDatetime}</td>
-                        </tr>
-                    </tbody>
-                </table>
+        
+          </div>
+          <br/>
+          <div className="mx_ProfileSettings_profile">
+            <Field id="patientPatientName" className="amp_CreateCaseDialog_display_field" label={_t("Patient name")}
+                    type="text" value={this.state.patientName} autoComplete="off"
+                    onChange={this._onNameChanged} readOnly />
+            <Field id="gender" className="amp_CreateCaseDialog_display_field" label={_t("Gender")}
+              value={_t(this.state.patientGender)} onChange={this._onGenderChanged} readOnly>
+            </Field>
+            <Field id="patientBirthday" className="amp_CreateCaseDialog_display_field" label={_t("Birthday")}
+                    type="text" value={this.state.patientBirthdate} autoComplete="off"
+                    onChange={this._onBirthdateChanged} readOnly/>
+          </div>
+          <br/>
+          <div className="amp_CreateCaseDialog_details">
+            <div className="amp_CreateCaseDialog_details_summary">{ _t('Anamnesis') }
+            </div>
+            <div className="amp_CaseTab_section amp_Flex_column">
+              <div>
+                <div className="mx_ProfileSettings_profile">
+                  <Field id="profileDisplayName" className="amp_CreateCaseDialog_display_field" label={_t("Responsiveness")}
+                          value={this.state.anamnesisData_responsiveness} autoComplete="off"
+                          onChange={this._onResponsivenessChanged} readOnly />
+                  <Field id="profileDisplayName" className="amp_CreateCaseDialog_display_field" label={_t("Pain")}
+                          value={this.state.anamnesisData_pain} autoComplete="off"
+                          onChange={this._onPainChanged} readOnly />
+                  <Field id="profileDisplayName" className="amp_CreateCaseDialog_display_field" label={_t("Last defecation")}
+                          value={this.state.anamnesisData_lastDefecation} autoComplete="off"
+                          onChange={this._onLastDefecationChanged} readOnly />
+                    </div>
+                    <div className="mx_ProfileSettings_profile">
+                  <Field id="profileDisplayName" className="amp_CreateCaseDialog_display_field" label={_t("Misc")}
+                          type="text" value={this.state.anamnesisData_misc} autoComplete="off"
+                          onChange={this._onMiscChanged} readOnly />
+                </div>
               </div>
-              <div style={anamnesisDataStyle}>
-                <span className="amp_CaseObservationsPanel_subheading">{_t("Anamnesis")}</span>
-                <table className="amp_CaseObservationsPanel_Table">
-                    <thead>
-                        <tr>
-                            <th width="25%"></th>
-                            <th width="25%"></th>
-                            <th width="25%"></th>
-                            <th width="25%"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr className="amp_CaseObservationsPanel_TableRow_Uneven">
-                          <td>{_t("Responsiveness")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.anamnesisData_responsiveness}</td>
-                          <td>{_t("Pain")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.anamnesisData_pain}</td>
-                        </tr>
-                        <tr className="amp_CaseObservationsPanel_TableRow_Even">
-                          <td>{_t("Last defecation")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.anamnesisData_lastDefecation}</td>
-                          <td>{_t("Misc")}</td>
-                          <td className="amp_CaseObservationsPanel_TableCell_Value">{this.state.anamnesisData_misc}</td>
-                        </tr>
-                    </tbody>
-                </table>
-              </div>
-            </div>
-            <div style={isClosedWarningStyle} className="amp_CaseObservationsPanel_isClosedWarning">
-              <span>{_t("This case has been closed. Editing is not possible anymore.")}</span>
-              <hr/>
             </div>
           </div>
-        );
-    },
+          
+        </div>
+
+        <div className="amp_CreateCaseDialog_details amp_Display_content">
+          <div className="amp_CreateCaseDialog_details_summary">{ _t('Vital data') }
+          </div>
+          <div className="amp_VitalData_section">
+            <div className="amp_CaseTab_section">
+              <Field id="vitalDataBloodpressureSys" className="amp_CreateCaseDialog_display_field" label={_t("Blood pressure systolic in mm/Hg")}
+                      step="1" value={this.state.vitalData_bloodPressureSys} autoComplete="off"
+                      onChange={this._onBloodpressureSysChanged} readOnly />
+              <Field id="vitalDataBloodpressureDia" className="amp_CreateCaseDialog_display_field" label={_t("Blood pressure diastolic in mm/Hg")}
+                      step="1" value={this.state.vitalData_bloodPressureDia} autoComplete="off"
+                      onChange={this._onBloodpressureDiaChanged} readOnly />
+              <Field id="vitalDataBloodpressureDatetime" className="amp_CreateCaseDialog_display_field" label={_t("Blood pressure datetime")}
+                          value={this.state.vitalData_bloodpressureDatetime} autoComplete="off"
+                        onChange={this._onBloodpressureDatetimeChanged} readOnly />
+            </div>
+            <div className="amp_CaseTab_section">
+              <Field id="vitalDataPulse" className="amp_CreateCaseDialog_display_field" label={_t("Pulse in bpm")}
+                      step="1" value={this.state.vitalData_pulse} autoComplete="off"
+                      onChange={this._onPulseChanged} readOnly />
+              <Field id="vitalDataPulseDatetime" className="amp_CreateCaseDialog_display_field" label={_t("Pulse datetime")}
+                          value={this.state.vitalData_pulseDatetime} autoComplete="off"
+                        onChange={this._onPulseDatetimeChanged} readOnly />
+            </div>
+            <div className="amp_CaseTab_section">
+              <Field id="vitalDataTemperature" className="amp_CreateCaseDialog_display_field" label={_t("Temperature in °C")}
+                      step="0.01" value={this.state.vitalData_temperature} autoComplete="off"
+                      onChange={this._onTemperatureChanged} readOnly />
+              <Field id="vitalDataTemperatureDatetime" className="amp_CreateCaseDialog_display_field" label={_t("Temperature datetime")}
+                          value={this.state.vitalData_temperatureDatetime} autoComplete="off"
+                        onChange={this._onTemperatureDatetimeChanged} readOnly />
+            </div>
+            <div className="amp_CaseTab_section">
+              <Field id="vitalDataBloodsugar" className="amp_CreateCaseDialog_display_field" label={_t("Blood sugar in mg/dl")}
+                      step="1" value={this.state.vitalData_bloodSugar} autoComplete="off"
+                      onChange={this._onSugarChanged} readOnly />
+              <Field id="vitalDataBloodsugarDatetime" className="amp_CreateCaseDialog_display_field" label={_t("Blood sugar datetime")}
+                          value={this.state.vitalData_bloodSugarDatetime} autoComplete="off"
+                        onChange={this._onSugarDatetimeChanged} readOnly />
+            </div>
+            <div className="amp_CaseTab_section">
+              <Field id="vitalDataWeight" className="amp_CreateCaseDialog_display_field" label={_t("Weight in kg")}
+                      step="0.01" value={this.state.vitalData_weight} autoComplete="off"
+                      onChange={this._onWeightChanged} readOnly />
+              <Field id="vitalDataWeightDatetime" className="amp_CreateCaseDialog_display_field" label={_t("Weight datetime")}
+                          value={this.state.vitalData_weightDatetime} autoComplete="off"
+                        onChange={this._onWeightDatetimeChanged} readOnly />
+            </div>
+            <div className="amp_CaseTab_section">
+              <Field id="vitalDataOxygen" className="amp_CreateCaseDialog_display_field" label={_t("Oxygen saturation in %")}
+                      step="0.01" value={this.state.vitalData_oxygen} autoComplete="off"
+                      onChange={this._onOxygenChanged} readOnly />
+              <Field id="vitalDataOxygenDatetime" className="amp_CreateCaseDialog_display_field" label={_t("Oxygen saturation datetime")}
+                          value={this.state.vitalData_oxygenDatetime} autoComplete="off"
+                        onChange={this._onOxygenDatetimeChanged} readOnly />
+            </div>
+          </div>
+        </div>
+      
+      </div> 
+            </div>
+      </div> 
+            </div>
+      </div> 
+              </div>
+      </div> 
+    </div>       
+            </div>
+    </div>       
+            </div>
+    </div>       
+              </div>
+    </div>       
+          </div>
+    </div>       
+            </div>
+    </div>       
+            </div>
+    </div>       
+              </div>
+    </div>       
+          </div>
+    </div>       
+            </div>
+    </div>       
+            </div>
+    </div>       
+              </div>
+    </div>       
+          </div>
+    </div>       
+            </div>
+    </div>       
+          </div>
+    </div>       
+          </div>
+    </div>       
+    );
+  },
 });
